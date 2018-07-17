@@ -1,0 +1,15 @@
+C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\bin\Release\GantryFreedom.dll
+C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\bin\Release\WindowsFormsApp1.exe.config
+C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\bin\Release\WindowsFormsApp1.exe.manifest
+C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\bin\Release\WindowsFormsApp1.application
+C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\bin\Release\WindowsFormsApp1.exe
+C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\bin\Release\WindowsFormsApp1.pdb
+C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\obj\Release\WindowsFormsApp1.Form1.resources
+C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\obj\Release\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\obj\Release\GantryInterface.csproj.GenerateResource.Cache
+C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\obj\Release\GantryInterface.csproj.CoreCompileInputs.cache
+C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\obj\Release\WindowsFormsApp1.exe.manifest
+C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\obj\Release\WindowsFormsApp1.application
+C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\obj\Release\WindowsFormsApp1.exe
+C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\obj\Release\WindowsFormsApp1.pdb
+C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\obj\Release\GantryInterface.csprojResolveAssemblyReference.cache
