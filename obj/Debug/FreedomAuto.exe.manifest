@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="WindowsFormsApp1.exe" version="1.0.0.3" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
-  <description asmv2:iconFile="Sora-Meliae-Matrilineare-Actions-system-run.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <asmv1:assemblyIdentity name="FreedomAuto.exe" version="1.0.0.4" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
+  <description asmv2:iconFile="Ampeross-Qetto-Control-panel-2.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="WindowsFormsApp1" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
-    <commandLine file="WindowsFormsApp1.exe" parameters="" />
+    <assemblyIdentity name="FreedomAuto" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+    <commandLine file="FreedomAuto.exe" parameters="" />
   </entryPoint>
   <trustInfo>
     <security>
@@ -43,17 +43,35 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WindowsFormsApp1.exe" size="226744">
-      <assemblyIdentity name="WindowsFormsApp1" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FreedomAuto.exe" size="575928">
+      <assemblyIdentity name="FreedomAuto" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>DF1gzfRrHWByXo74FZtEzXXHXILIJIP+s88J/m3+VrE=</dsig:DigestValue>
+        <dsig:DigestValue>HBD80LSIs2GUrsTE0qknbTICqaOp5I0AK56slZ4MP2Q=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
+  <file name="Ampeross-Qetto-Control-panel-2.ico" size="226780">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>azurR3xLdyAcPatFCW7M9dnmD1PZrgaqkRuGafIhHpc=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="FreedomAuto.exe.config" size="186">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>PHWXGWnHgIeVMvfarRU9fyyIhl2OQtF8t+21+KTggvo=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="GantryFreedom.dll" size="51200">
     <hash>
       <dsig:Transforms>
@@ -70,15 +88,6 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>pg9F6KyiVCL5aEedxgLQ+0IpOxZ/mqIE+oDAVk5S2zo=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="WindowsFormsApp1.exe.config" size="186">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>hW4v+PeMBdhnM2xLkpUMkK0Osj6snyL6jc7rIizh5Bc=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

@@ -109,6 +109,7 @@
             "LCR2,",
             "LCR3,",
             "LCR4,",
+            "LCRmeasureall,",
             "Freq,",
             "Regatron_P,",
             "Regatron_V,",

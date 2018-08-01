@@ -17,7 +17,7 @@ namespace WindowsFormsApp1
 
         public string VerLcr()
         {
-            return "1.0";
+            return "1.0.1";
         }
 
         public int ConnectLCR(String ip, Int32 port)
@@ -45,18 +45,20 @@ namespace WindowsFormsApp1
             catch (Exception err) { MessageBox.Show(err.Message, "Error", MessageBoxButtons.OK); }
         }
 
-        public int LCRwrite_read(String strMsg)
+        public void LCRwrite_read(String strMsg)
         {
             try
             {
                 ResponseData = String.Empty;
-                strMsg = strMsg + "\r\n";
+                strMsg = strMsg + "\r\n";              
                 Byte[] data = System.Text.Encoding.ASCII.GetBytes(strMsg);
                 ns  = LCRsocket.GetStream();
                 ns.Write(data, 0, data.Length);
-                Byte[] DAT = new Byte[256];
+                
                 int milliseconds = 50;
                 Thread.Sleep(milliseconds);
+                Byte[] DAT = new Byte[1024];
+
                 if (ns.DataAvailable)
                 {
                     Int32 bytes = ns.Read(DAT, 0, DAT.Length);
@@ -65,19 +67,20 @@ namespace WindowsFormsApp1
                 }
                 else
                  {
-                    milliseconds = 50;
+                    milliseconds = 500;
                     Thread.Sleep(milliseconds);
-                    if (ns.DataAvailable)
-                    {
-                        Int32 bytes = ns.Read(DAT, 0, DAT.Length);
-                        ResponseData = System.Text.Encoding.ASCII.GetString(DAT, 0, bytes);
-                        ResponseData.Trim();
-                   }
+                   // await Task.Delay(milliseconds);
+                        if (ns.DataAvailable)
+                        {
+                            Int32 bytes = ns.Read(DAT, 0, DAT.Length);
+                            ResponseData = System.Text.Encoding.ASCII.GetString(DAT, 0, bytes);
+                            ResponseData.Trim();
+                        }
                   }
-
+                
             }
             catch (Exception ERR) { MessageBox.Show(ERR.Message, "Error"); }
-            return 0;
+            //return 0;
         }
 
         public void LCR_Param_Change(int BoxNo, string ChangeTo)
@@ -99,6 +102,19 @@ namespace WindowsFormsApp1
         {
             LCRwrite_read(":MEASure?");
 
+            int Counter_LCR_retry = 0;
+            string[] tokens = ResponseData.Split(',');
+            while (4!=tokens.Length)
+            {
+                if (Counter_LCR_retry > 49) //retry if read data not showing LCR1/LCR2/LCR3/LCR4 four data. Limit try 50 times
+                { break; }
+                else
+                {
+                    LCRwrite_read(":MEASure?");
+                    tokens = ResponseData.Split(',');
+                    Counter_LCR_retry++;
+                }
+            }
         }
     }
 }

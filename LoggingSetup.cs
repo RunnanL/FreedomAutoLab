@@ -62,26 +62,14 @@ namespace WindowsFormsApp1
             CommandList.Add("LCR2, ");
             CommandList.Add("LCR3, ");
             CommandList.Add("LCR4, ");
+            CommandList.Add("LCRmeasureall, ");
             CommandList.Add("Freq, ");
             CommandList.Add("Regatron_P, ");
             CommandList.Add("Regatron_V, ");
             CommandList.Add("Regatron_A, ");
+            CommandList.Add("ZES(), ");
 
 
-        }
-
-        class EXE
-        {
-            //Script thread
-            public void ThExe()
-            {
-
-            }
-
-            private static void aa()
-            {
-                
-            }
         }
 
         #region ScriptLogging
@@ -109,7 +97,7 @@ namespace WindowsFormsApp1
                     CtrlOrder.Clear();
                     var FragmentCtrl = LineItem.Split(',');
                     int walk = 0;
-                    while (walk < (FragmentCtrl.Length - 1))
+                    while (walk < (FragmentCtrl.Length))
                     {
                         switch (FragmentCtrl[walk].Trim().ToUpper())
                         {
@@ -122,7 +110,7 @@ namespace WindowsFormsApp1
                                 walk++;
                                 break;
                             case "INTV":
-                                CtrlOrder.Add("Intv");
+                                CtrlOrder.Add("INTV");
                                 walk++;
                                 break;
                             default:
@@ -139,7 +127,7 @@ namespace WindowsFormsApp1
                     var FragmentCmd = LineItem.Split(',');
                     int WalkCtrl = 0;
                     int WalkCmd = 1;//skip first # in Cmd
-                    while (WalkCmd < (FragmentCmd.Length - 1))   //walk through cmd line
+                    while (WalkCmd < (FragmentCmd.Length ))   //walk through cmd line
                     {
                         if (StopFlag == true) { break; } //Stop Flag Set, break loop
                         switch (CtrlOrder[WalkCtrl].ToUpper())
@@ -194,10 +182,11 @@ namespace WindowsFormsApp1
                             case "INTV":
                                 try
                                 {
-                                    int miliseconds = Convert.ToInt32(FragmentCmd[WalkCmd++]) * 1000;
+                                    double miliseconds = Convert.ToDouble(FragmentCmd[WalkCmd++]) * 1000;
                                     WalkCtrl++;
                                     ExecuteMsg.AppendText("Waiting " + miliseconds / 1000 + " s" + '\n');
-                                    Thread.Sleep(miliseconds);
+                                    //Thread.Sleep(miliseconds);
+                                    await Task.Delay(Convert.ToInt32(miliseconds));
                                     WalkCtrl++;
                                 }
                                 catch (Exception IntvErr) { }
@@ -215,65 +204,210 @@ namespace WindowsFormsApp1
                     var FragmentRead = LineItem.Split(',');
                     int WalkRead = 1;//skip first | in Cmd
                     string LineContents = "";
+                    string ReadBuffer = "";
                     //string FragmentJudgement = "";
                     while (WalkRead < FragmentRead.Length)
                     {
                         if (StopFlag == true) { break; } //Stop Flag Set, break loop
                         switch (FragmentRead[WalkRead].Trim().ToUpper())
                         {
+                            //case "XYZ":
                             case "X":
                                 try
                                 {
                                     Double x = 0.0, y = 0.0, z = 0.0;
                                     Form1.Pos(ref x, ref y, ref z);
-                                    LineContents = LineContents + Convert.ToString(x) + "," + Convert.ToString(y) + "," + Convert.ToString(z) + ",";
+                                    ReadBuffer = Convert.ToString(x) + "," + Convert.ToString(y) + "," + Convert.ToString(z) + ",";
+                                    //gantry data check 
+                                    int RetryGantryCount = 0;
+                                    while (true) // retry loop if Gantry read is not correct
+                                    { 
+                                        string[] tokens = ReadBuffer.Split(',');
+                                        if(RetryGantryCount>4) //Retry read gantry times > 4, pop out dialogue for user to decide
+                                        {
+                                            DialogResult GantryReadingWarn = MessageBox.Show("One or more gantry position reading is EMPTY, please check gantry connection", "Warning", MessageBoxButtons.AbortRetryIgnore);
+                                            if (GantryReadingWarn == DialogResult.Abort) { StopFlag = true; break; }
+                                            if (GantryReadingWarn == DialogResult.Retry) { RetryGantryCount = 0; continue; }
+                                            if (GantryReadingWarn == DialogResult.Ignore) { break; }
+                                        }
+                                        if(""==tokens[0].Trim()||""==tokens[1].Trim()||""==tokens[2].Trim())
+                                        {
+                                            await Task.Delay(250);
+                                            Form1.Pos(ref x, ref y, ref z);
+                                            ReadBuffer = Convert.ToString(x) + "," + Convert.ToString(y) + "," + Convert.ToString(z) + ",";
+                                            RetryGantryCount++;
+                                        }
+                                        else { break; }
+                                    }
+                                    //pass check, store data
+                                    LineContents = LineContents + ReadBuffer;
                                     ExecuteMsg.AppendText("Gantry position read;\n");
                                 }
                                 catch (Exception GanErr) { }
                                 WalkRead += 3;
                                 break;
+                           case "LCRREADALL": // when receive LCRMEASUREALL, measure all four channels of LCR
+                                try
+                                {
+                                    HIOKI.Measure();
+                                    string[] tokenslcr;
+                                    //LCR read data check
+                                    int RetryLCRCount = 0;
+                                    while (true) // retry loop if LCR read is not correct
+                                    {
+                                        tokenslcr = HIOKI.ResponseData.Split(',');
+                                        if (RetryLCRCount > 4) //Retry read LCR times > 4, pop out dialogue for user to decide
+                                        {
+                                            DialogResult GantryReadingWarn = MessageBox.Show("One or more LCR measure is EMPTY, please check LCR connection", "Warning", MessageBoxButtons.AbortRetryIgnore);
+                                            if (GantryReadingWarn == DialogResult.Abort) { StopFlag = true; break; }
+                                            if (GantryReadingWarn == DialogResult.Retry) { RetryLCRCount = 0; continue; }
+                                            if (GantryReadingWarn == DialogResult.Ignore) { break; }
+                                        }
+                                        if (" " == tokenslcr[0].Trim() || " " == tokenslcr[1].Trim() || " " == tokenslcr[2].Trim() || " "==tokenslcr[3].Trim())
+                                        {
+                                            await Task.Delay(200);
+                                            HIOKI.Measure();
+                                            RetryLCRCount++;
+                                        }
+                                        else { break; }
+                                    }
+                                    //pass check, store data
+                                    LineContents = LineContents + tokenslcr[0].Trim() + "," + tokenslcr[1].Trim() + "," + tokenslcr[2].Trim() + "," + tokenslcr[3].Trim() + ",";
+                                    ExecuteMsg.AppendText("LCR all parameters read\n");
+                                }
+                                catch (Exception LCRerr) { LineContents = LineContents + " ErrReading, ErrReading, ErrReading, ErrReading,"; }
+                                WalkRead +=4;
+                                break;
                             case "LCR1":
                                 try
                                 {
                                     HIOKI.Measure();
-                                    string[] tokens1 = HIOKI.ResponseData.Split(',');
+                                    string[] tokens1;
+                                    //data check
+                                    int RetryLCRCount = 0;
+                                    while (true) // retry loop if LCR read is not correct
+                                    {
+                                        tokens1 = HIOKI.ResponseData.Split(',');
+                                        //ExecuteMsg.AppendText("LCR1:"+tokens1[0].Trim() + '/' + tokens1[1].Trim() + '/' + tokens1[2].Trim() + '/' + tokens1[3].Trim()); //TEST ONLY
+                                        if (RetryLCRCount > 4) //Retry read LCR1 times > 4, pop out dialogue for user to decide
+                                        {
+                                            DialogResult GantryReadingWarn = MessageBox.Show("LCR1 reading is EMPTY, please check LCR connection", "Warning", MessageBoxButtons.AbortRetryIgnore);
+                                            if (GantryReadingWarn == DialogResult.Abort) { StopFlag = true; break; }
+                                            if (GantryReadingWarn == DialogResult.Retry) { RetryLCRCount = 0; continue; }
+                                            if (GantryReadingWarn == DialogResult.Ignore) { break; }
+                                        }
+                                        if (" " == tokens1[0].Trim()|| "" == tokens1[0].Trim())
+                                        {
+                                            await Task.Delay(200);
+                                            HIOKI.Measure();
+                                            RetryLCRCount++;
+                                        }
+                                        else { break; }
+                                    }
+                                    //pass LCR1 check
                                     LineContents = LineContents + tokens1[0].Trim() + ",";
                                     ExecuteMsg.AppendText("LCR1 read;\n");
                                 }
-                                catch (Exception LCRerr) { }
+                                catch (Exception LCRerr) { LineContents = LineContents + "ErrReading,"; }
                                 WalkRead++;
                                 break;
                             case "LCR2":
                                 try
                                 {
                                     HIOKI.Measure();
-                                    string[] tokens2 = HIOKI.ResponseData.Split(',');
+                                    string[] tokens2;
+                                    //data check
+                                    int RetryLCRCount = 0;
+                                    while (true) // retry loop if LCR read is not correct
+                                    {
+                                        tokens2 = HIOKI.ResponseData.Split(',');
+                                        //ExecuteMsg.AppendText("LCR2:"+tokens2[0].Trim() + '/' + tokens2[1].Trim() + '/' + tokens2[2].Trim() + '/' + tokens2[3].Trim()); //TEST ONLY
+                                        if (RetryLCRCount > 4) //Retry read LCR1 times > 4, pop out dialogue for user to decide
+                                        {
+                                            DialogResult GantryReadingWarn = MessageBox.Show("LCR2 reading is EMPTY, please check LCR connection", "Warning", MessageBoxButtons.AbortRetryIgnore);
+                                            if (GantryReadingWarn == DialogResult.Abort) { StopFlag = true; break; }
+                                            if (GantryReadingWarn == DialogResult.Retry) { RetryLCRCount = 0; continue; }
+                                            if (GantryReadingWarn == DialogResult.Ignore) { break; }
+                                        }
+                                        if (" " == tokens2[1].Trim()|| "" == tokens2[1].Trim())
+                                        {
+                                            await Task.Delay(200);
+                                            HIOKI.Measure();
+                                            RetryLCRCount++;
+                                        }
+                                        else { break; }
+                                    }
+                                    //pass LCR1 check
                                     LineContents = LineContents + tokens2[1].Trim() + ",";
                                     ExecuteMsg.AppendText("LCR2 read;\n");
                                 }
-                                catch (Exception LCRerr) { }
+                                catch (Exception LCRerr) { LineContents = LineContents + "ErrReading,"; }
                                 WalkRead++;
                                 break;
                             case "LCR3":
                                 try
                                 {
                                     HIOKI.Measure();
-                                    string[] tokens3 = HIOKI.ResponseData.Split(',');
+                                    string[] tokens3;
+                                    //data check
+                                    int RetryLCRCount = 0;
+                                    while (true) // retry loop if LCR read is not correct
+                                    {
+                                        tokens3 = HIOKI.ResponseData.Split(',');
+                                        //ExecuteMsg.AppendText("LCR3:"+tokens3[0].Trim() + '/' + tokens3[1].Trim() + '/' + tokens3[2].Trim() + '/' + tokens3[3].Trim()); //TEST ONLY
+                                        if (RetryLCRCount > 4) //Retry read LCR1 times > 4, pop out dialogue for user to decide
+                                        {
+                                            DialogResult GantryReadingWarn = MessageBox.Show("LCR3 reading is EMPTY, please check LCR connection", "Warning", MessageBoxButtons.AbortRetryIgnore);
+                                            if (GantryReadingWarn == DialogResult.Abort) { StopFlag = true; break; }
+                                            if (GantryReadingWarn == DialogResult.Retry) { RetryLCRCount = 0; continue; }
+                                            if (GantryReadingWarn == DialogResult.Ignore) { break; }
+                                        }
+                                        if (" " == tokens3[2].Trim()|| "" == tokens3[2].Trim())
+                                        {
+                                            await Task.Delay(200);
+                                            HIOKI.Measure();
+                                            RetryLCRCount++;
+                                        }
+                                        else { break; }
+                                    }
+                                    //pass LCR1 check
                                     LineContents = LineContents + tokens3[2].Trim() + ",";
                                     ExecuteMsg.AppendText("LCR3 read;\n");
                                 }
-                                catch (Exception LCRerr) { }
+                                catch (Exception LCRerr) { LineContents = LineContents + "ErrReading,"; }
                                 WalkRead++;
                                 break;
                             case "LCR4":
                                 try
                                 {
                                     HIOKI.Measure();
-                                    string[] tokens4 = HIOKI.ResponseData.Split(',');
+                                    string[] tokens4;
+                                    //data check
+                                    int RetryLCRCount = 0;
+                                    while (true) // retry loop if LCR read is not correct
+                                    {
+                                        tokens4 = HIOKI.ResponseData.Split(',');
+                                        //ExecuteMsg.AppendText("LCR4:"+tokens4[0].Trim() + '/' + tokens4[1].Trim() + '/' + tokens4[2].Trim() + '/' + tokens4[3].Trim()); //TEST ONLY
+                                        if (RetryLCRCount > 4) //Retry read LCR1 times > 4, pop out dialogue for user to decide
+                                        {
+                                            DialogResult GantryReadingWarn = MessageBox.Show("LCR3 reading is EMPTY, please check LCR connection", "Warning", MessageBoxButtons.AbortRetryIgnore);
+                                            if (GantryReadingWarn == DialogResult.Abort) { StopFlag = true; break; }
+                                            if (GantryReadingWarn == DialogResult.Retry) { RetryLCRCount = 0; continue; }
+                                            if (GantryReadingWarn == DialogResult.Ignore) { break; }
+                                        }
+                                        if (" " == tokens4[3].Trim()|| "" == tokens4[3].Trim())
+                                        {
+                                            await Task.Delay(200);
+                                            HIOKI.Measure();
+                                            RetryLCRCount++;
+                                        }
+                                        else { break; }
+                                    }
+                                    //pass LCR1 check
                                     LineContents = LineContents + tokens4[3].Trim() + ",";
                                     ExecuteMsg.AppendText("LCR4 read;\n");
                                 }
-                                catch (Exception LCRerr) { }
+                                catch (Exception LCRerr) { LineContents = LineContents + "ErrReading,"; }
                                 WalkRead++;
                                 break;
 
@@ -398,13 +532,18 @@ namespace WindowsFormsApp1
         {
             OutList.Clear();
             int ReadListCurser = 0;
-            int Out_test_curser = 0;
+            //int Out_test_curser = 0;
             string CurrentTitle = "";
             foreach (string ScriptlineIterator in CSVcontents)
             {
                 try
                 {
                     string Scriptline = ScriptlineIterator.ToUpper(); //Unify format for easy checking
+                    if(Regex.IsMatch(ScriptlineIterator, @".*[LCRREADALL].*")) //Check if there's LCRmeasureall command, replace with 4 channel titles
+                    {
+                        Scriptline = Scriptline.Replace("LCRREADALL", " LCRALL_1, LCRALL_2, LCRALL_3, LCRALL_4");
+                    }
+
                     if (Regex.IsMatch(ScriptlineIterator, @"i*[ZES]\((.*)\)")) //Check if line title has ZES(xx?;:xx?;:xx?(x:x))
                     {
                         Scriptline = Scriptline.Replace("ZES", "");
@@ -503,10 +642,11 @@ namespace WindowsFormsApp1
         private void View_Click(object sender, EventArgs e)
         {
             ExecuteMsg.AppendText("--------View Result--------\n");
+            SaveRead();
             int i = 0;
-            while (i < ReadList.Count)
+            while (i < OutList.Count)
             {
-                ExecuteMsg.AppendText(ReadList[i]+'\n');
+                ExecuteMsg.AppendText(OutList[i]+'\n');
                 i++;
             }
             ExecuteMsg.AppendText("--------View Result End--------\n");

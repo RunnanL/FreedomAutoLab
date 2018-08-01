@@ -110,6 +110,10 @@
             this.RegatronConnStat = new System.Windows.Forms.Label();
             this.GantryConnStat = new System.Windows.Forms.Label();
             this.GantryGroup = new System.Windows.Forms.GroupBox();
+            this.labelMabs = new System.Windows.Forms.Label();
+            this.Zabs = new System.Windows.Forms.Label();
+            this.Yabs = new System.Windows.Forms.Label();
+            this.Xabs = new System.Windows.Forms.Label();
             this.labelMrdy = new System.Windows.Forms.Label();
             this.Zrdy = new System.Windows.Forms.Label();
             this.Yrdy = new System.Windows.Forms.Label();
@@ -136,12 +140,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.progressBar3 = new System.Windows.Forms.ProgressBar();
             this.posY = new System.Windows.Forms.TextBox();
-            this.labelMabs = new System.Windows.Forms.Label();
             this.posX = new System.Windows.Forms.TextBox();
             this.labelMstat = new System.Windows.Forms.Label();
-            this.Zabs = new System.Windows.Forms.Label();
-            this.Yabs = new System.Windows.Forms.Label();
-            this.Xabs = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.labelY = new System.Windows.Forms.Label();
             this.labelX = new System.Windows.Forms.Label();
@@ -492,8 +492,8 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(51, 17);
+            this.toolStripStatusLabel1.Text = "Version :";
             // 
             // ComPort
             // 
@@ -1024,6 +1024,10 @@
             // 
             // GantryGroup
             // 
+            this.GantryGroup.Controls.Add(this.labelMabs);
+            this.GantryGroup.Controls.Add(this.Zabs);
+            this.GantryGroup.Controls.Add(this.Yabs);
+            this.GantryGroup.Controls.Add(this.Xabs);
             this.GantryGroup.Controls.Add(this.labelMrdy);
             this.GantryGroup.Controls.Add(this.Zrdy);
             this.GantryGroup.Controls.Add(this.Yrdy);
@@ -1036,12 +1040,8 @@
             this.GantryGroup.Controls.Add(this.posZ);
             this.GantryGroup.Controls.Add(this.RunStatus);
             this.GantryGroup.Controls.Add(this.posY);
-            this.GantryGroup.Controls.Add(this.labelMabs);
             this.GantryGroup.Controls.Add(this.posX);
             this.GantryGroup.Controls.Add(this.labelMstat);
-            this.GantryGroup.Controls.Add(this.Zabs);
-            this.GantryGroup.Controls.Add(this.Yabs);
-            this.GantryGroup.Controls.Add(this.Xabs);
             this.GantryGroup.Controls.Add(this.label_pos);
             this.GantryGroup.Controls.Add(this.label8);
             this.GantryGroup.Controls.Add(this.labelY);
@@ -1077,10 +1077,56 @@
             this.GantryGroup.TabStop = false;
             this.GantryGroup.Text = "Gantry";
             // 
+            // labelMabs
+            // 
+            this.labelMabs.AutoSize = true;
+            this.labelMabs.Location = new System.Drawing.Point(351, 20);
+            this.labelMabs.Name = "labelMabs";
+            this.labelMabs.Size = new System.Drawing.Size(25, 13);
+            this.labelMabs.TabIndex = 43;
+            this.labelMabs.Text = "Abs";
+            this.labelMabs.Visible = false;
+            // 
+            // Zabs
+            // 
+            this.Zabs.AutoSize = true;
+            this.Zabs.BackColor = System.Drawing.Color.Red;
+            this.Zabs.Location = new System.Drawing.Point(357, 99);
+            this.Zabs.Name = "Zabs";
+            this.Zabs.Size = new System.Drawing.Size(13, 13);
+            this.Zabs.TabIndex = 42;
+            this.Zabs.Text = "  ";
+            this.Zabs.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Zabs.Visible = false;
+            // 
+            // Yabs
+            // 
+            this.Yabs.AutoSize = true;
+            this.Yabs.BackColor = System.Drawing.Color.Red;
+            this.Yabs.Location = new System.Drawing.Point(357, 71);
+            this.Yabs.Name = "Yabs";
+            this.Yabs.Size = new System.Drawing.Size(13, 13);
+            this.Yabs.TabIndex = 41;
+            this.Yabs.Text = "  ";
+            this.Yabs.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Yabs.Visible = false;
+            // 
+            // Xabs
+            // 
+            this.Xabs.AutoSize = true;
+            this.Xabs.BackColor = System.Drawing.Color.Red;
+            this.Xabs.Location = new System.Drawing.Point(357, 45);
+            this.Xabs.Name = "Xabs";
+            this.Xabs.Size = new System.Drawing.Size(13, 13);
+            this.Xabs.TabIndex = 40;
+            this.Xabs.Text = "  ";
+            this.Xabs.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Xabs.Visible = false;
+            // 
             // labelMrdy
             // 
             this.labelMrdy.AutoSize = true;
-            this.labelMrdy.Location = new System.Drawing.Point(342, 20);
+            this.labelMrdy.Location = new System.Drawing.Point(314, 20);
             this.labelMrdy.Name = "labelMrdy";
             this.labelMrdy.Size = new System.Drawing.Size(38, 13);
             this.labelMrdy.TabIndex = 39;
@@ -1090,7 +1136,7 @@
             // 
             this.Zrdy.AutoSize = true;
             this.Zrdy.BackColor = System.Drawing.Color.Red;
-            this.Zrdy.Location = new System.Drawing.Point(352, 99);
+            this.Zrdy.Location = new System.Drawing.Point(324, 99);
             this.Zrdy.Name = "Zrdy";
             this.Zrdy.Size = new System.Drawing.Size(13, 13);
             this.Zrdy.TabIndex = 38;
@@ -1101,7 +1147,7 @@
             // 
             this.Yrdy.AutoSize = true;
             this.Yrdy.BackColor = System.Drawing.Color.Red;
-            this.Yrdy.Location = new System.Drawing.Point(352, 71);
+            this.Yrdy.Location = new System.Drawing.Point(324, 71);
             this.Yrdy.Name = "Yrdy";
             this.Yrdy.Size = new System.Drawing.Size(13, 13);
             this.Yrdy.TabIndex = 37;
@@ -1112,7 +1158,7 @@
             // 
             this.Xrdy.AutoSize = true;
             this.Xrdy.BackColor = System.Drawing.Color.Red;
-            this.Xrdy.Location = new System.Drawing.Point(352, 45);
+            this.Xrdy.Location = new System.Drawing.Point(324, 45);
             this.Xrdy.Name = "Xrdy";
             this.Xrdy.Size = new System.Drawing.Size(13, 13);
             this.Xrdy.TabIndex = 36;
@@ -1366,15 +1412,6 @@
             this.posY.TabIndex = 29;
             this.posY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // labelMabs
-            // 
-            this.labelMabs.AutoSize = true;
-            this.labelMabs.Location = new System.Drawing.Point(316, 20);
-            this.labelMabs.Name = "labelMabs";
-            this.labelMabs.Size = new System.Drawing.Size(25, 13);
-            this.labelMabs.TabIndex = 19;
-            this.labelMabs.Text = "Abs";
-            // 
             // posX
             // 
             this.posX.Location = new System.Drawing.Point(41, 42);
@@ -1392,39 +1429,6 @@
             this.labelMstat.Size = new System.Drawing.Size(37, 13);
             this.labelMstat.TabIndex = 18;
             this.labelMstat.Text = "Online";
-            // 
-            // Zabs
-            // 
-            this.Zabs.AutoSize = true;
-            this.Zabs.BackColor = System.Drawing.Color.Red;
-            this.Zabs.Location = new System.Drawing.Point(322, 99);
-            this.Zabs.Name = "Zabs";
-            this.Zabs.Size = new System.Drawing.Size(13, 13);
-            this.Zabs.TabIndex = 17;
-            this.Zabs.Text = "  ";
-            this.Zabs.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Yabs
-            // 
-            this.Yabs.AutoSize = true;
-            this.Yabs.BackColor = System.Drawing.Color.Red;
-            this.Yabs.Location = new System.Drawing.Point(322, 71);
-            this.Yabs.Name = "Yabs";
-            this.Yabs.Size = new System.Drawing.Size(13, 13);
-            this.Yabs.TabIndex = 16;
-            this.Yabs.Text = "  ";
-            this.Yabs.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Xabs
-            // 
-            this.Xabs.AutoSize = true;
-            this.Xabs.BackColor = System.Drawing.Color.Red;
-            this.Xabs.Location = new System.Drawing.Point(322, 45);
-            this.Xabs.Name = "Xabs";
-            this.Xabs.Size = new System.Drawing.Size(13, 13);
-            this.Xabs.TabIndex = 15;
-            this.Xabs.Text = "  ";
-            this.Xabs.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label8
             // 
@@ -1522,7 +1526,7 @@
             // 
             // TimerGantry
             // 
-            this.TimerGantry.Interval = 1000;
+            this.TimerGantry.Interval = 1200;
             this.TimerGantry.Tick += new System.EventHandler(this.TimerGantry_Tick);
             // 
             // groupBox3
@@ -1832,7 +1836,7 @@
             // 
             // TimerLCR
             // 
-            this.TimerLCR.Interval = 500;
+            this.TimerLCR.Interval = 1000;
             this.TimerLCR.Tick += new System.EventHandler(this.TimerLCR_Tick);
             // 
             // groupBox4
@@ -2384,11 +2388,7 @@
         private System.Windows.Forms.ProgressBar progressBar2;
         private System.Windows.Forms.TextBox CMD_txt;
         private System.Windows.Forms.Button CMD_go;
-        private System.Windows.Forms.Label labelMabs;
         private System.Windows.Forms.Label labelMstat;
-        private System.Windows.Forms.Label Zabs;
-        private System.Windows.Forms.Label Yabs;
-        private System.Windows.Forms.Label Xabs;
         private System.Windows.Forms.Timer TimerRegatron;
         private System.Windows.Forms.TextBox textBox_comPort;
         private System.Windows.Forms.Button button_disconnect;
@@ -2493,6 +2493,10 @@
         private System.Windows.Forms.Label ZES3unit;
         private System.Windows.Forms.Label ZES2unit;
         private System.Windows.Forms.Label ZES1unit;
+        private System.Windows.Forms.Label labelMabs;
+        private System.Windows.Forms.Label Zabs;
+        private System.Windows.Forms.Label Yabs;
+        private System.Windows.Forms.Label Xabs;
     }
 }
 
