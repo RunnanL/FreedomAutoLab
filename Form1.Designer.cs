@@ -66,6 +66,8 @@
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newScriptLoggingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gantryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CalibrationManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -527,6 +529,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileMenu,
+            this.gantryToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -549,7 +552,7 @@
             this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newScriptLoggingToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // newScriptLoggingToolStripMenuItem
@@ -562,9 +565,24 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // gantryToolStripMenuItem
+            // 
+            this.gantryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CalibrationManualToolStripMenuItem});
+            this.gantryToolStripMenuItem.Name = "gantryToolStripMenuItem";
+            this.gantryToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.gantryToolStripMenuItem.Text = "Gantry";
+            // 
+            // CalibrationManualToolStripMenuItem
+            // 
+            this.CalibrationManualToolStripMenuItem.Name = "CalibrationManualToolStripMenuItem";
+            this.CalibrationManualToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.CalibrationManualToolStripMenuItem.Text = "Calibration / Manual";
+            this.CalibrationManualToolStripMenuItem.Click += new System.EventHandler(this.CalibrationManualToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -2497,6 +2515,8 @@
         private System.Windows.Forms.Label Zabs;
         private System.Windows.Forms.Label Yabs;
         private System.Windows.Forms.Label Xabs;
+        private System.Windows.Forms.ToolStripMenuItem gantryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CalibrationManualToolStripMenuItem;
     }
 }
 

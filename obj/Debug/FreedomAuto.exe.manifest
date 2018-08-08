@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FreedomAuto.exe" size="575928">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FreedomAuto.exe" size="577464">
       <assemblyIdentity name="FreedomAuto" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>HBD80LSIs2GUrsTE0qknbTICqaOp5I0AK56slZ4MP2Q=</dsig:DigestValue>
+        <dsig:DigestValue>2qtKY6jnYIEIlZMEbJPn8zux/9Qpb58HCw+Fo7sL23w=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

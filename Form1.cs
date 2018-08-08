@@ -143,7 +143,7 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
-            toolStripStatusLabel1.Text = "Version: V1.0.2  ";  //UI version
+            toolStripStatusLabel1.Text = "Version: V1.0.3  ";  //UI version
 
             #region Gantry Init
             goX.Text = "0";
@@ -289,7 +289,7 @@ namespace WindowsFormsApp1
             System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
 
-        #region Menu strip: Data Logging
+        #region Menu strip
         private void newScriptLoggingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoggingForm LogParamForm = new LoggingForm(ZESzimmer);
@@ -297,6 +297,11 @@ namespace WindowsFormsApp1
             auto_refresh.Checked = false;
             AutoReadLCR.Checked = false;
             AutoRdZes.Checked = false;
+        }
+
+        private void CalibrationManualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
         }
         #endregion
 

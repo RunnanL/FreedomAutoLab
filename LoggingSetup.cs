@@ -55,6 +55,7 @@ namespace WindowsFormsApp1
 
             ControlList.Add("X, Y, Z, ");
             ControlList.Add("Intv, ");
+            ControlList.Add("HIOKI(), ");
             ControlList.Add("Freq, ");
 
             CommandList.Add("X, Y, Z, ");
@@ -111,6 +112,10 @@ namespace WindowsFormsApp1
                                 break;
                             case "INTV":
                                 CtrlOrder.Add("INTV");
+                                walk++;
+                                break;
+                            case "HIOKI()":
+                                CtrlOrder.Add("HIOKI");
                                 walk++;
                                 break;
                             default:
@@ -190,6 +195,20 @@ namespace WindowsFormsApp1
                                     WalkCtrl++;
                                 }
                                 catch (Exception IntvErr) { }
+                                break;
+                            case "HIOKI":
+                                try
+                                {
+                                    if (Regex.IsMatch(FragmentCmd[WalkCmd].Trim().ToUpper().ToString(), @"i*[H][I][O][K][I]\((.*)\)"))  //find command like HIOKI(xxx)
+                                    {
+                                        string CMDstr = Regex.Match(FragmentCmd[WalkCmd].Trim().ToUpper().ToString(), @"(?<=\()(.*)(?=\))").Value;
+                                        HIOKI.LCRwrite_read(CMDstr);
+                                    }
+                                    else { MessageBox.Show("HIOKI Command input is invalid!", "WARNING!"); }
+                                    WalkCmd++;
+                                    WalkCtrl++;
+                                }
+                                catch(Exception LcrCmdErr) { }
                                 break;
                             default:
                                 WalkCtrl++; break;
@@ -447,7 +466,7 @@ namespace WindowsFormsApp1
                                 WalkRead++;
                                 break;
                             default:  //will run when not matching script commands: ZES()
-                                if (Regex.IsMatch(FragmentRead[WalkRead].Trim().ToUpper().ToString(), @"i*[ZES]\((.*)\)"))  //find command like ZES(xxx)
+                                if (Regex.IsMatch(FragmentRead[WalkRead].Trim().ToUpper().ToString(), @"i*[Z][E][S]\((.*)\)"))  //find command like ZES(xxx)
                                 {
                                     string CMDstr = Regex.Match(FragmentRead[WalkRead].Trim().ToUpper().ToString(), @"(?<=\()(.*)(?=\))").Value;
                                     ZES_ZIMMER.ZES_Send_Read(CMDstr);

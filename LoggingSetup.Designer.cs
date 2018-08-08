@@ -64,6 +64,7 @@
             this.Control.Items.AddRange(new object[] {
             "X, Y, Z,",
             "Intv,",
+            "HIOKI(),",
             "Freq,"});
             this.Control.Location = new System.Drawing.Point(126, 28);
             this.Control.Name = "Control";
