@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.IO.Ports;
 using System.IO;
 using System.Text.RegularExpressions;
+using GantryDllCs;// new
 
 namespace WindowsFormsApp1
 {
@@ -35,18 +36,20 @@ namespace WindowsFormsApp1
         bool StopFlag = false;  //Stop scripting indicator. True to trigget stop
 
         public PowermeterZES ZES_ZIMMER;
+        public Gantry GantryDll; // new 
 
         public string LogVer()  //Logging service version number
         {
             return "1.0.1";
         }
 
-        public LoggingForm(PowermeterZES ZES_ZIMMER)
+        public LoggingForm(PowermeterZES ZES_ZIMMER, Gantry GantryDll)
         {
             InitializeComponent();
             LogVerDisp.Text = "Logging module: V"+LogVer(); // Version of logging module
 
             this.ZES_ZIMMER = ZES_ZIMMER;
+            this.GantryDll = GantryDll;
             LinetypeList.Add("$, ");
             LinetypeList.Add("&, ");
             LinetypeList.Add("#, ");
@@ -81,6 +84,7 @@ namespace WindowsFormsApp1
             List<string> CtrlOrder = new List<string>();
             //link equipment class
             LCRmeter HIOKI = new LCRmeter();
+
             //PowermeterZES ZES_ZIMMER = new PowermeterZES();
             //Clear read buffer used before
             ReadList.Clear();
@@ -147,16 +151,16 @@ namespace WindowsFormsApp1
                                     ExecuteMsg.AppendText("Moving to : " + x + "," + y + "," + z + '\n');
                                     WalkCtrl++;
                                     WalkCmd++;
-                                    Form1.MoveGantry(x, y, z, 16);
+                                    GantryDll.MoveGantry(x, y, z);
 
                                     while (true)
                                     { if (StopFlag == true)
                                         {
                                             try
                                             {
-                                                Form1.GantryStop();
+                                                GantryDll.GantryStop();
                                                 Thread.Sleep(1500);
-                                                Form1.PosRecali();
+                                                GantryDll.PosRecali();
                                             }
                                             catch (Exception ErrStopScript) { }
                                             break;
@@ -164,7 +168,7 @@ namespace WindowsFormsApp1
                                         Int32 Readybit = 0;
                                         try
                                         {
-                                            Form1.CtrlReady(ref Readybit);
+                                            GantryDll.CtrlReady(ref Readybit);
                                             if (111 == Readybit)
                                             { break; }
                                             //Thread.Sleep(500);
@@ -235,7 +239,7 @@ namespace WindowsFormsApp1
                                 try
                                 {
                                     Double x = 0.0, y = 0.0, z = 0.0;
-                                    Form1.Pos(ref x, ref y, ref z);
+                                    GantryDll.Pos(ref x, ref y, ref z);
                                     ReadBuffer = Convert.ToString(x) + "," + Convert.ToString(y) + "," + Convert.ToString(z) + ",";
                                     //gantry data check 
                                     int RetryGantryCount = 0;
@@ -252,7 +256,7 @@ namespace WindowsFormsApp1
                                         if(""==tokens[0].Trim()||""==tokens[1].Trim()||""==tokens[2].Trim())
                                         {
                                             await Task.Delay(250);
-                                            Form1.Pos(ref x, ref y, ref z);
+                                            GantryDll.Pos(ref x, ref y, ref z);
                                             ReadBuffer = Convert.ToString(x) + "," + Convert.ToString(y) + "," + Convert.ToString(z) + ",";
                                             RetryGantryCount++;
                                         }
@@ -718,25 +722,28 @@ namespace WindowsFormsApp1
 
         private void AddinputMeth_Click(object sender, EventArgs e)
         {
-            Script.AppendText(LinetypeList[Linetype.SelectedIndex]);
+            try { Script.AppendText(LinetypeList[Linetype.SelectedIndex]); }
+            catch { MessageBox.Show("Please select a 'Method' from box","Opps",MessageBoxButtons.OK); }
         }
 
         private void AddinputCtrl_Click(object sender, EventArgs e)
         {
-            Script.AppendText(ControlList[Control.SelectedIndex]);
+            try { Script.AppendText(ControlList[Control.SelectedIndex]); }
+            catch { MessageBox.Show("Please select a 'Control' from box", "Opps", MessageBoxButtons.OK); }
         }
 
         private void AddinputRead_Click(object sender, EventArgs e)
         {
-            Script.AppendText(CommandList[Command.SelectedIndex]);
+            try { Script.AppendText(CommandList[Command.SelectedIndex]); }
+            catch { MessageBox.Show("Please select a 'Read' from box", "Opps", MessageBoxButtons.OK); }
         }
 
         private void Stop_Click(object sender, EventArgs e)
         {
             try
             {
-                Form1.GantryStop();
-                Form1.PosRecali();
+                GantryDll.GantryStop();
+                GantryDll.PosRecali();
             }
             catch (Exception) { };
 

@@ -43,14 +43,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FreedomAuto.exe" size="577464">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FreedomAuto.exe" size="559544">
       <assemblyIdentity name="FreedomAuto" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>2qtKY6jnYIEIlZMEbJPn8zux/9Qpb58HCw+Fo7sL23w=</dsig:DigestValue>
+        <dsig:DigestValue>UGa7B6oIeS8C4412Gq47JBy0j3tQuiAbGLFw9kzavWw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GantryDllCs.dll" size="8704">
+      <assemblyIdentity name="GantryDllCs" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>zU7a5vogOrvQkcyvSGp0X2fpGMZe4dxFqyFJx74/PcA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -70,24 +82,6 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>PHWXGWnHgIeVMvfarRU9fyyIhl2OQtF8t+21+KTggvo=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="GantryFreedom.dll" size="51200">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>i95QwdlUIGWcCbt6hQIA4WD8hCZ5ibCgrhaD/M7nyqU=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="Sora-Meliae-Matrilineare-Actions-system-run.ico" size="171999">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>pg9F6KyiVCL5aEedxgLQ+0IpOxZ/mqIE+oDAVk5S2zo=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

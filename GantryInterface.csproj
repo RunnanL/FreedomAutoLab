@@ -72,6 +72,9 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GantryDllCs">
+      <HintPath>..\..\GantryDllCs\GantryDllCs\bin\Debug\GantryDllCs.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
@@ -155,10 +158,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Ampeross-Qetto-Control-panel-2.ico" />
-    <Content Include="GantryFreedom.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Sora-Meliae-Matrilineare-Actions-system-run.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using GantryDllCs;
 
 namespace WindowsFormsApp1
 {
@@ -23,7 +24,8 @@ namespace WindowsFormsApp1
         #endregion
 
         #region gantrydll
-        [DllImport("GantryFreedom.dll", EntryPoint = "DllVersion",CallingConvention = CallingConvention.Cdecl)]
+        Gantry GantryDll = new Gantry();
+        /*[DllImport("GantryFreedom.dll", EntryPoint = "DllVersion",CallingConvention = CallingConvention.Cdecl)]
         public static extern int DllVersion(StringBuilder Ver, ref int bufferSize);
         [DllImport("GantryFreedom.dll", EntryPoint = "GantryComConnect", CallingConvention = CallingConvention.Cdecl)]
         public static extern Int32 GantryComConnect(String COMNo); //, ref Int32 PortNoFound
@@ -48,7 +50,7 @@ namespace WindowsFormsApp1
         [DllImport("GantryFreedom.dll", EntryPoint = "CtrlReady", CallingConvention = CallingConvention.Cdecl)]
         public static extern Int32 CtrlReady(ref Int32 ReadyBits);
         [DllImport("GantryFreedom.dll", EntryPoint = "AbsCheck", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Int32 AbsCheck(Int32 No);
+        public static extern Int32 AbsCheck(Int32 No);*/
         #endregion
 
         #region regatronmembers
@@ -149,9 +151,10 @@ namespace WindowsFormsApp1
             goX.Text = "0";
             goY.Text = "0";
             goZ.Text = "0";
-            StringBuilder Gantry_v = new StringBuilder(256);
-            Int32 bufferSize = 32;
-            DllVersion(Gantry_v, ref bufferSize);
+            //StringBuilder Gantry_v = new StringBuilder(256);
+            //Int32 bufferSize = 32;
+            string Gantry_v;
+            Gantry_v =GantryDll.DllVersion();
             toolStripStatusLabel1.Text = toolStripStatusLabel1.Text + "Gantry: " + Gantry_v.ToString();
 
             Xstat.BackColor = RedNo;
@@ -233,22 +236,6 @@ namespace WindowsFormsApp1
             #endregion
         }
 
-        private void ZofstChk_CheckedChanged(object sender, EventArgs e)
-        {
-            if (ZofstChk.Checked == true)
-            { ZofsetValue.Enabled = true;
-                ZofstPOSlbl.Visible = true;
-                ZofstPOS.Visible = true;
-            }
-            else
-            {
-                ZofsetValue.Enabled = false;
-                ZofstPOSlbl.Visible = false;
-                ZofstPOS.Visible = false;
-            }
-        }
-
-
         #region Form Events, MenuStrip 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -292,7 +279,7 @@ namespace WindowsFormsApp1
         #region Menu strip
         private void newScriptLoggingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LoggingForm LogParamForm = new LoggingForm(ZESzimmer);
+            LoggingForm LogParamForm = new LoggingForm(ZESzimmer,GantryDll);
             LogParamForm.Show();
             auto_refresh.Checked = false;
             AutoReadLCR.Checked = false;
@@ -310,7 +297,7 @@ namespace WindowsFormsApp1
         #region Gantry Events & Buttons
         public int ChkMotor()
         {
-            if (MotorCheck(1) == 1)
+            if (GantryDll.MotorCheck(1) == 1)
             {
                 Xstat.BackColor = GreenYes;
             }
@@ -318,7 +305,7 @@ namespace WindowsFormsApp1
             {
                 Xstat.BackColor = RedNo;
             }
-            if (MotorCheck(2) == 1)
+            if (GantryDll.MotorCheck(2) == 1)
             {
                 Ystat.BackColor = GreenYes;
             }
@@ -326,7 +313,7 @@ namespace WindowsFormsApp1
             {
                 Ystat.BackColor = RedNo;
             }
-            if (MotorCheck(3) == 1)
+            if (GantryDll.MotorCheck(3) == 1)
             {
                 Zstat.BackColor = GreenYes;
             }
@@ -344,28 +331,28 @@ namespace WindowsFormsApp1
         public int ChkAbs()
         { //  motor chk need separate with #1y1 load memory. TBC
             Int32 result;
-            result = AbsCheck(1);
+            result = GantryDll.AbsCheck(1);
             switch (result)
             {
-                case 0:
-                    Xabs.BackColor = GreenYes; break;
                 case 1:
+                    Xabs.BackColor = GreenYes; break;
+                case 0:
                     Xabs.BackColor = RedNo; break;
             }
-            result = AbsCheck(2);
+            result = GantryDll.AbsCheck(2);
             switch (result)
             {
-                case 0:
-                    Yabs.BackColor = GreenYes; break;
                 case 1:
+                    Yabs.BackColor = GreenYes; break;
+                case 0:
                     Yabs.BackColor = RedNo; break;
             }
-            result = AbsCheck(3);
+            result = GantryDll.AbsCheck(3);
             switch (result)
             {
-                case 0:
-                    Zabs.BackColor = GreenYes; break;
                 case 1:
+                    Zabs.BackColor = GreenYes; break;
+                case 0:
                     Zabs.BackColor = RedNo; break;
             }
 
@@ -375,16 +362,15 @@ namespace WindowsFormsApp1
 
         private void TimerGantry_Tick(object sender, EventArgs e)
         {
-                // Int32 Result;
-                Int32 ReadyBit = 0;
-                Double Px = 0.0;
-                Double Py = 0.0;
-                Double Pz = 0.0;
-                try
-                {
-                    Pos(ref Px, ref Py, ref Pz);
-                    CtrlReady(ref ReadyBit);
-
+            // Int32 Result;
+            Int32 ReadyBit = 0;
+            Double Px = 0.0;
+            Double Py = 0.0;
+            Double Pz = 0.0;
+            try
+            {
+                GantryDll.Pos(ref Px, ref Py, ref Pz);
+                GantryDll.CtrlReady(ref ReadyBit);
                     if (1 == (ReadyBit & 100) / 100)
                     { Xrdy.BackColor = GreenYes; }
                     else { Xrdy.BackColor = RedNo; }
@@ -402,14 +388,8 @@ namespace WindowsFormsApp1
                 catch (Exception)
                 {
                     Xstat.BackColor = RedNo; Ystat.BackColor = RedNo; Zstat.BackColor = RedNo; auto_refresh.Checked = false;
-                    Xrdy.BackColor = RedNo; Yrdy.BackColor = RedNo; Zrdy.BackColor = RedNo; return; 
+                    Xrdy.BackColor = RedNo; Yrdy.BackColor = RedNo; Zrdy.BackColor = RedNo;return;
                 } //xyz disconnection detect
-
-
-                if (ZofstChk.Checked == true)
-                    try
-                    { ZofstPOS.Text = (Convert.ToDouble(posZ.Text) + Convert.ToDouble(ZofsetValue.Text)).ToString(); }
-                    catch (Exception) { }
 
                 if (Run_Pct_Flg == true)
                     try
@@ -475,7 +455,7 @@ namespace WindowsFormsApp1
             Run_Pct_Flg = true; //progress bar enable flag
 
             Int32 BufSize = 32;
-            MoveGantry(TarX, TarY, TarZ, BufSize);
+            GantryDll.MoveGantry(TarX, TarY, TarZ);
        
             //if (Stat==2)
             // MessageBox.Show("Gantry connection lost. Please check connection", "Motor Not Available", MessageBoxButtons.OK);
@@ -484,7 +464,7 @@ namespace WindowsFormsApp1
 
         private void ConnectGantry_Click(object sender, EventArgs e) 
         {
-            ComGantryStatus_n = GantryComConnect(ComPort.Text); //ref stat
+            ComGantryStatus_n = GantryDll.GantryComConnect(ComPort.Text); //ref stat
             if (1 == ComGantryStatus_n)
             {
                 GantryConnStat.BackColor = GreenYes;
@@ -506,27 +486,26 @@ namespace WindowsFormsApp1
                 Double Px = 0.0;
                 Double Py = 0.0;
                 Double Pz = 0.0;
-                Pos(ref Px, ref Py, ref Pz);               
+                GantryDll.Pos(ref Px, ref Py, ref Pz);               
                 posX.Text = Px.ToString();
                 goX.Text = Px.ToString();
                 posY.Text = Py.ToString();
                 goY.Text = Py.ToString();
                 posZ.Text = Pz.ToString();
                 goZ.Text = Pz.ToString();
-                if (ZofstChk.Checked == true)
-                { ZofstPOS.Text = (Convert.ToDouble(posZ.Text) + Convert.ToDouble(ZofsetValue.Text)).ToString(); }
                 auto_refresh.Checked = true;
             }
             catch (Exception ex) { MessageBox.Show("Cannot initialize motor controllers. Motor controller unavailable. \n\n" + ex, "Connection Error!!", MessageBoxButtons.OK); }
             if (1 == ComGantryStatus_n) { MessageBox.Show("Gantry COM port connect successful! Status code: " + ComGantryStatus_n.ToString(), "Com Port Message", MessageBoxButtons.OK); }
-            else if (1 == ComGantryStatus_n) { MessageBox.Show("Gantry COM port already connected. Status code: " + ComGantryStatus_n.ToString(), "Com Port Message", MessageBoxButtons.OK); }
+            else if (2 == ComGantryStatus_n) { MessageBox.Show("Gantry COM port already connected. Status code: " + ComGantryStatus_n.ToString(), "Com Port Message", MessageBoxButtons.OK); }
             else { MessageBox.Show("Gantry COM port invalid! Please check connection and try again! Status code: " + ComGantryStatus_n.ToString(), "Com Port Message", MessageBoxButtons.OK); }
         }
 
         private void DisconnGantry_Click(object sender, EventArgs e)
         {
-            int Msg = GantryComDisconnect(ComPort.Text);
-            if (Msg == 0)
+            //int Msg = GantryComDisconnect(ComPort.Text);
+            int Msg = GantryDll.GantryComDisconnect();
+            if (Msg == 1)
             {
                 GantryConnStat.BackColor = RedNo;
                 MessageBox.Show("Gantry COM port disconnected.", "Com Port Message", MessageBoxButtons.OK);
@@ -557,31 +536,29 @@ namespace WindowsFormsApp1
                 Double Px = 0.0;
                 Double Py = 0.0;
                 Double Pz = 0.0;
-                Pos(ref Px, ref Py, ref Pz);
+                GantryDll.Pos(ref Px, ref Py, ref Pz);
                 posX.Text = Px.ToString();
                 posY.Text = Py.ToString();
                 posZ.Text = Pz.ToString();
-                if (ZofstChk.Checked == true)
-                { ZofstPOS.Text = (Convert.ToDouble(posZ.Text) + Convert.ToDouble(ZofsetValue.Text)).ToString(); }
             }
             catch (Exception Err) { MessageBox.Show("Cannot read position from Gantry, please try again.","",MessageBoxButtons.OK); }
         }
 
         private void CMD_go_Click(object sender, EventArgs e)
         {
-            StringBuilder RX = new StringBuilder(128);
+            //StringBuilder RX = new StringBuilder(128);
             int BufSiz = 64;
-            Com_W_R(CMD_txt.Text, RX, ref BufSiz);
-            TestLabel.Text = RX.ToString();
+            GantryDll.Com_W_R(CMD_txt.Text);
+            TestLabel.Text = GantryDll.ReadBuffer.ToString();
+            //TestLabel.Text = RX.ToString();
         }
 
         private void stop_Click(object sender, EventArgs e)
         {
-            GantryStop();
+            GantryDll.GantryStop();
             int milliseconds = 2000;
             Thread.Sleep(milliseconds);
-            PosRecali();
-            //int Buffsize = 64;
+            GantryDll.PosRecali();
 
             Double Px = 0.0;
             Double Py = 0.0;
@@ -590,8 +567,6 @@ namespace WindowsFormsApp1
             posX.Text = Px.ToString();
             posY.Text = Py.ToString();
             posZ.Text = Pz.ToString();
-            if (ZofstChk.Checked == true)
-            { ZofstPOS.Text = (Convert.ToDouble(posZ.Text) + Convert.ToDouble(ZofsetValue.Text)).ToString(); }
             MessageBox.Show("User stopped Gantry", "Message", MessageBoxButtons.OK);
         }
         #endregion
@@ -1040,6 +1015,11 @@ namespace WindowsFormsApp1
         private void LCR3Name_TextChanged(object sender, EventArgs e)
         {
             HIOKI.LCR_Param_Change(3, LCR3Name.Text);
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Lumen Freedom AutoLab\n"+toolStripStatusLabel1.Text,"About",MessageBoxButtons.OK);
         }
 
         private void LCR3Name_SelectedIndexChanged(object sender, EventArgs e)

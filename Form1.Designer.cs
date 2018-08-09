@@ -120,11 +120,6 @@
             this.Zrdy = new System.Windows.Forms.Label();
             this.Yrdy = new System.Windows.Forms.Label();
             this.Xrdy = new System.Windows.Forms.Label();
-            this.ZofstPOSlbl = new System.Windows.Forms.Label();
-            this.ZofstPOS = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.ZofsetValue = new System.Windows.Forms.TextBox();
-            this.ZofstChk = new System.Windows.Forms.CheckBox();
             this.posZ = new System.Windows.Forms.TextBox();
             this.RunStatus = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -552,7 +547,7 @@
             this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newScriptLoggingToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // newScriptLoggingToolStripMenuItem
@@ -565,7 +560,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -576,6 +571,7 @@
             this.gantryToolStripMenuItem.Name = "gantryToolStripMenuItem";
             this.gantryToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.gantryToolStripMenuItem.Text = "Gantry";
+            this.gantryToolStripMenuItem.Visible = false;
             // 
             // CalibrationManualToolStripMenuItem
             // 
@@ -595,8 +591,9 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // groupBox1
             // 
@@ -1050,11 +1047,6 @@
             this.GantryGroup.Controls.Add(this.Zrdy);
             this.GantryGroup.Controls.Add(this.Yrdy);
             this.GantryGroup.Controls.Add(this.Xrdy);
-            this.GantryGroup.Controls.Add(this.ZofstPOSlbl);
-            this.GantryGroup.Controls.Add(this.ZofstPOS);
-            this.GantryGroup.Controls.Add(this.label11);
-            this.GantryGroup.Controls.Add(this.ZofsetValue);
-            this.GantryGroup.Controls.Add(this.ZofstChk);
             this.GantryGroup.Controls.Add(this.posZ);
             this.GantryGroup.Controls.Add(this.RunStatus);
             this.GantryGroup.Controls.Add(this.posY);
@@ -1182,60 +1174,6 @@
             this.Xrdy.TabIndex = 36;
             this.Xrdy.Text = "  ";
             this.Xrdy.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // ZofstPOSlbl
-            // 
-            this.ZofstPOSlbl.AutoSize = true;
-            this.ZofstPOSlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ZofstPOSlbl.Location = new System.Drawing.Point(110, 127);
-            this.ZofstPOSlbl.Name = "ZofstPOSlbl";
-            this.ZofstPOSlbl.Size = new System.Drawing.Size(82, 12);
-            this.ZofstPOSlbl.TabIndex = 35;
-            this.ZofstPOSlbl.Text = "Z :(with offset)";
-            this.ZofstPOSlbl.Visible = false;
-            // 
-            // ZofstPOS
-            // 
-            this.ZofstPOS.Location = new System.Drawing.Point(41, 123);
-            this.ZofstPOS.Name = "ZofstPOS";
-            this.ZofstPOS.ReadOnly = true;
-            this.ZofstPOS.Size = new System.Drawing.Size(64, 20);
-            this.ZofstPOS.TabIndex = 34;
-            this.ZofstPOS.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ZofstPOS.Visible = false;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(119, 321);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(23, 13);
-            this.label11.TabIndex = 33;
-            this.label11.Text = "mm";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label11.Visible = false;
-            // 
-            // ZofsetValue
-            // 
-            this.ZofsetValue.Enabled = false;
-            this.ZofsetValue.Location = new System.Drawing.Point(44, 318);
-            this.ZofsetValue.Name = "ZofsetValue";
-            this.ZofsetValue.Size = new System.Drawing.Size(73, 20);
-            this.ZofsetValue.TabIndex = 32;
-            this.ZofsetValue.Text = "0";
-            this.ZofsetValue.Visible = false;
-            // 
-            // ZofstChk
-            // 
-            this.ZofstChk.AutoSize = true;
-            this.ZofstChk.Location = new System.Drawing.Point(44, 299);
-            this.ZofstChk.Name = "ZofstChk";
-            this.ZofstChk.Size = new System.Drawing.Size(62, 17);
-            this.ZofstChk.TabIndex = 31;
-            this.ZofstChk.Text = "Z offset";
-            this.ZofstChk.UseVisualStyleBackColor = true;
-            this.ZofstChk.Visible = false;
-            this.ZofstChk.CheckedChanged += new System.EventHandler(this.ZofstChk_CheckedChanged);
             // 
             // posZ
             // 
@@ -1510,10 +1448,9 @@
             // 
             // TestLabel
             // 
-            this.TestLabel.AutoSize = true;
             this.TestLabel.Location = new System.Drawing.Point(804, 381);
             this.TestLabel.Name = "TestLabel";
-            this.TestLabel.Size = new System.Drawing.Size(90, 13);
+            this.TestLabel.Size = new System.Drawing.Size(215, 117);
             this.TestLabel.TabIndex = 25;
             this.TestLabel.Text = "Test Display Area";
             this.TestLabel.Visible = false;
@@ -1544,7 +1481,7 @@
             // 
             // TimerGantry
             // 
-            this.TimerGantry.Interval = 1200;
+            this.TimerGantry.Interval = 1500;
             this.TimerGantry.Tick += new System.EventHandler(this.TimerGantry_Tick);
             // 
             // groupBox3
@@ -2432,11 +2369,6 @@
         private System.Windows.Forms.TextBox posY;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox ZofsetValue;
-        private System.Windows.Forms.CheckBox ZofstChk;
-        private System.Windows.Forms.Label ZofstPOSlbl;
-        private System.Windows.Forms.TextBox ZofstPOS;
         private System.Windows.Forms.Label LCRConnStat;
         private System.Windows.Forms.Button LCR_disconnect;
         private System.Windows.Forms.Button LCR_connect;
