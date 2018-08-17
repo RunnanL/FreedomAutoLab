@@ -1,6 +1,6 @@
-﻿namespace FreedomAuto
+﻿namespace WindowsFormsApp1
 {
-    partial class GantrySettings_MenuStrip
+    partial class GantryCalibration
     {
         /// <summary>
         /// Required designer variable.
@@ -31,50 +31,51 @@
             this.ManualCmdInput_tb = new System.Windows.Forms.TextBox();
             this.ManualCmd_gb = new System.Windows.Forms.GroupBox();
             this.ManualCmdSend_btn = new System.Windows.Forms.Button();
-            this.ConsoleCmd_tb = new System.Windows.Forms.TextBox();
+            this.ConsoleDialogue_TextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.Calibration_gb = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.CalibrationMode_gb = new System.Windows.Forms.GroupBox();
+            this.CalibrateHere_gb = new System.Windows.Forms.GroupBox();
+            this.CaliZ_tb = new System.Windows.Forms.TextBox();
+            this.CaliY_tb = new System.Windows.Forms.TextBox();
+            this.CalibrateHere = new System.Windows.Forms.Button();
+            this.CaliX_tb = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.DirectMove_gb = new System.Windows.Forms.GroupBox();
+            this.stop = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.MovPlusY_btn = new System.Windows.Forms.Button();
+            this.MovMinusZ_tb = new System.Windows.Forms.TextBox();
+            this.MovPlusX_btn = new System.Windows.Forms.Button();
+            this.MovPlusZ_tb = new System.Windows.Forms.TextBox();
             this.MovMinusY_btn = new System.Windows.Forms.Button();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.MovMinusX_btn = new System.Windows.Forms.Button();
+            this.MovMinusZ_btn = new System.Windows.Forms.Button();
+            this.MovPlusX_tb = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
+            this.MovPlusZ_btn = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.MovMinusY_tb = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.MovPlusY_tb = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.MovMinusX_tb = new System.Windows.Forms.TextBox();
             this.En_btn = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.button7 = new System.Windows.Forms.Button();
+            this.SendCmd_btn = new System.Windows.Forms.Button();
+            this.GantryCmd_tb = new System.Windows.Forms.TextBox();
             this.ManualCmd_gb.SuspendLayout();
-            this.Calibration_gb.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.CalibrationMode_gb.SuspendLayout();
+            this.CalibrateHere_gb.SuspendLayout();
+            this.DirectMove_gb.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,16 +105,17 @@
             this.ManualCmdSend_btn.TabIndex = 2;
             this.ManualCmdSend_btn.Text = "Send";
             this.ManualCmdSend_btn.UseVisualStyleBackColor = true;
-            this.ManualCmdSend_btn.Click += new System.EventHandler(this.ManualCmdSend_btn_Click);
             // 
-            // ConsoleCmd_tb
+            // ConsoleDialogue_TextBox
             // 
-            this.ConsoleCmd_tb.Location = new System.Drawing.Point(12, 25);
-            this.ConsoleCmd_tb.Multiline = true;
-            this.ConsoleCmd_tb.Name = "ConsoleCmd_tb";
-            this.ConsoleCmd_tb.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ConsoleCmd_tb.Size = new System.Drawing.Size(571, 111);
-            this.ConsoleCmd_tb.TabIndex = 3;
+            this.ConsoleDialogue_TextBox.Location = new System.Drawing.Point(12, 25);
+            this.ConsoleDialogue_TextBox.Multiline = true;
+            this.ConsoleDialogue_TextBox.Name = "ConsoleDialogue_TextBox";
+            this.ConsoleDialogue_TextBox.ReadOnly = true;
+            this.ConsoleDialogue_TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.ConsoleDialogue_TextBox.Size = new System.Drawing.Size(571, 111);
+            this.ConsoleDialogue_TextBox.TabIndex = 3;
+            this.ConsoleDialogue_TextBox.Text = "* Please connect Gantry before making changes *\r\n";
             // 
             // label1
             // 
@@ -124,63 +126,65 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Gantry Dialogue";
             // 
-            // Calibration_gb
+            // CalibrationMode_gb
             // 
-            this.Calibration_gb.Controls.Add(this.groupBox2);
-            this.Calibration_gb.Controls.Add(this.groupBox1);
-            this.Calibration_gb.Controls.Add(this.En_btn);
-            this.Calibration_gb.Location = new System.Drawing.Point(12, 143);
-            this.Calibration_gb.Name = "Calibration_gb";
-            this.Calibration_gb.Size = new System.Drawing.Size(571, 336);
-            this.Calibration_gb.TabIndex = 5;
-            this.Calibration_gb.TabStop = false;
-            this.Calibration_gb.Text = "Calibration Mode";
+            this.CalibrationMode_gb.Controls.Add(this.CalibrateHere_gb);
+            this.CalibrationMode_gb.Controls.Add(this.DirectMove_gb);
+            this.CalibrationMode_gb.Controls.Add(this.En_btn);
+            this.CalibrationMode_gb.Location = new System.Drawing.Point(12, 143);
+            this.CalibrationMode_gb.Name = "CalibrationMode_gb";
+            this.CalibrationMode_gb.Size = new System.Drawing.Size(571, 336);
+            this.CalibrationMode_gb.TabIndex = 5;
+            this.CalibrationMode_gb.TabStop = false;
+            this.CalibrationMode_gb.Text = "Calibration Mode";
             // 
-            // groupBox2
+            // CalibrateHere_gb
             // 
-            this.groupBox2.Controls.Add(this.textBox9);
-            this.groupBox2.Controls.Add(this.textBox8);
-            this.groupBox2.Controls.Add(this.button6);
-            this.groupBox2.Controls.Add(this.textBox7);
-            this.groupBox2.Controls.Add(this.label16);
-            this.groupBox2.Controls.Add(this.label15);
-            this.groupBox2.Controls.Add(this.label14);
-            this.groupBox2.Location = new System.Drawing.Point(8, 247);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(551, 78);
-            this.groupBox2.TabIndex = 22;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Calibration";
+            this.CalibrateHere_gb.Controls.Add(this.CaliZ_tb);
+            this.CalibrateHere_gb.Controls.Add(this.CaliY_tb);
+            this.CalibrateHere_gb.Controls.Add(this.CalibrateHere);
+            this.CalibrateHere_gb.Controls.Add(this.CaliX_tb);
+            this.CalibrateHere_gb.Controls.Add(this.label16);
+            this.CalibrateHere_gb.Controls.Add(this.label15);
+            this.CalibrateHere_gb.Controls.Add(this.label14);
+            this.CalibrateHere_gb.Enabled = false;
+            this.CalibrateHere_gb.Location = new System.Drawing.Point(8, 247);
+            this.CalibrateHere_gb.Name = "CalibrateHere_gb";
+            this.CalibrateHere_gb.Size = new System.Drawing.Size(551, 78);
+            this.CalibrateHere_gb.TabIndex = 22;
+            this.CalibrateHere_gb.TabStop = false;
+            this.CalibrateHere_gb.Text = "Calibration";
             // 
-            // textBox9
+            // CaliZ_tb
             // 
-            this.textBox9.Location = new System.Drawing.Point(200, 39);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(75, 20);
-            this.textBox9.TabIndex = 3;
+            this.CaliZ_tb.Location = new System.Drawing.Point(200, 39);
+            this.CaliZ_tb.Name = "CaliZ_tb";
+            this.CaliZ_tb.Size = new System.Drawing.Size(75, 20);
+            this.CaliZ_tb.TabIndex = 16;
             // 
-            // textBox8
+            // CaliY_tb
             // 
-            this.textBox8.Location = new System.Drawing.Point(107, 39);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(75, 20);
-            this.textBox8.TabIndex = 2;
+            this.CaliY_tb.Location = new System.Drawing.Point(107, 39);
+            this.CaliY_tb.Name = "CaliY_tb";
+            this.CaliY_tb.Size = new System.Drawing.Size(75, 20);
+            this.CaliY_tb.TabIndex = 15;
             // 
-            // button6
+            // CalibrateHere
             // 
-            this.button6.Location = new System.Drawing.Point(295, 37);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(84, 23);
-            this.button6.TabIndex = 1;
-            this.button6.Text = "Calibrate Here";
-            this.button6.UseVisualStyleBackColor = true;
+            this.CalibrateHere.Location = new System.Drawing.Point(295, 37);
+            this.CalibrateHere.Name = "CalibrateHere";
+            this.CalibrateHere.Size = new System.Drawing.Size(84, 23);
+            this.CalibrateHere.TabIndex = 17;
+            this.CalibrateHere.Text = "Calibrate Here";
+            this.CalibrateHere.UseVisualStyleBackColor = true;
+            this.CalibrateHere.Click += new System.EventHandler(this.CalibrateHere_Click);
             // 
-            // textBox7
+            // CaliX_tb
             // 
-            this.textBox7.Location = new System.Drawing.Point(17, 39);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(75, 20);
-            this.textBox7.TabIndex = 0;
+            this.CaliX_tb.Location = new System.Drawing.Point(17, 39);
+            this.CaliX_tb.Name = "CaliX_tb";
+            this.CaliX_tb.Size = new System.Drawing.Size(75, 20);
+            this.CaliX_tb.TabIndex = 14;
             // 
             // label16
             // 
@@ -209,38 +213,52 @@
             this.label14.TabIndex = 10;
             this.label14.Text = "X (mm)";
             // 
-            // groupBox1
+            // DirectMove_gb
             // 
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.MovMinusY_btn);
-            this.groupBox1.Controls.Add(this.textBox6);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.textBox5);
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.button5);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.textBox4);
-            this.groupBox1.Location = new System.Drawing.Point(8, 48);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(551, 192);
-            this.groupBox1.TabIndex = 21;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Direct Movement";
+            this.DirectMove_gb.Controls.Add(this.stop);
+            this.DirectMove_gb.Controls.Add(this.label2);
+            this.DirectMove_gb.Controls.Add(this.MovPlusY_btn);
+            this.DirectMove_gb.Controls.Add(this.MovMinusZ_tb);
+            this.DirectMove_gb.Controls.Add(this.MovPlusX_btn);
+            this.DirectMove_gb.Controls.Add(this.MovPlusZ_tb);
+            this.DirectMove_gb.Controls.Add(this.MovMinusY_btn);
+            this.DirectMove_gb.Controls.Add(this.label11);
+            this.DirectMove_gb.Controls.Add(this.MovMinusX_btn);
+            this.DirectMove_gb.Controls.Add(this.MovMinusZ_btn);
+            this.DirectMove_gb.Controls.Add(this.MovPlusX_tb);
+            this.DirectMove_gb.Controls.Add(this.label10);
+            this.DirectMove_gb.Controls.Add(this.label12);
+            this.DirectMove_gb.Controls.Add(this.MovPlusZ_btn);
+            this.DirectMove_gb.Controls.Add(this.label13);
+            this.DirectMove_gb.Controls.Add(this.label9);
+            this.DirectMove_gb.Controls.Add(this.MovMinusY_tb);
+            this.DirectMove_gb.Controls.Add(this.label8);
+            this.DirectMove_gb.Controls.Add(this.label3);
+            this.DirectMove_gb.Controls.Add(this.label7);
+            this.DirectMove_gb.Controls.Add(this.MovPlusY_tb);
+            this.DirectMove_gb.Controls.Add(this.label6);
+            this.DirectMove_gb.Controls.Add(this.label4);
+            this.DirectMove_gb.Controls.Add(this.label5);
+            this.DirectMove_gb.Controls.Add(this.MovMinusX_tb);
+            this.DirectMove_gb.Enabled = false;
+            this.DirectMove_gb.Location = new System.Drawing.Point(8, 48);
+            this.DirectMove_gb.Name = "DirectMove_gb";
+            this.DirectMove_gb.Size = new System.Drawing.Size(551, 192);
+            this.DirectMove_gb.TabIndex = 21;
+            this.DirectMove_gb.TabStop = false;
+            this.DirectMove_gb.Text = "Direct Movement";
+            // 
+            // stop
+            // 
+            this.stop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stop.ForeColor = System.Drawing.Color.Red;
+            this.stop.Location = new System.Drawing.Point(483, 140);
+            this.stop.Name = "stop";
+            this.stop.Size = new System.Drawing.Size(62, 46);
+            this.stop.TabIndex = 13;
+            this.stop.Text = "STOP";
+            this.stop.UseVisualStyleBackColor = true;
+            this.stop.Click += new System.EventHandler(this.stop_Click);
             // 
             // label2
             // 
@@ -251,54 +269,57 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "mm";
             // 
+            // MovPlusY_btn
+            // 
+            this.MovPlusY_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MovPlusY_btn.Location = new System.Drawing.Point(51, 84);
+            this.MovPlusY_btn.Name = "MovPlusY_btn";
+            this.MovPlusY_btn.Size = new System.Drawing.Size(30, 30);
+            this.MovPlusY_btn.TabIndex = 6;
+            this.MovPlusY_btn.Text = "←";
+            this.MovPlusY_btn.UseVisualStyleBackColor = true;
+            this.MovPlusY_btn.Click += new System.EventHandler(this.MovPlusY_btn_Click);
+            // 
+            // MovMinusZ_tb
+            // 
+            this.MovMinusZ_tb.Location = new System.Drawing.Point(450, 79);
+            this.MovMinusZ_tb.Name = "MovMinusZ_tb";
+            this.MovMinusZ_tb.Size = new System.Drawing.Size(48, 20);
+            this.MovMinusZ_tb.TabIndex = 11;
+            this.MovMinusZ_tb.Text = "000";
+            this.MovMinusZ_tb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // MovPlusX_btn
+            // 
+            this.MovPlusX_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MovPlusX_btn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.MovPlusX_btn.Location = new System.Drawing.Point(152, 30);
+            this.MovPlusX_btn.Name = "MovPlusX_btn";
+            this.MovPlusX_btn.Size = new System.Drawing.Size(30, 30);
+            this.MovPlusX_btn.TabIndex = 2;
+            this.MovPlusX_btn.Text = "↑";
+            this.MovPlusX_btn.UseVisualStyleBackColor = true;
+            this.MovPlusX_btn.Click += new System.EventHandler(this.MovPlusX_btn_Click);
+            // 
+            // MovPlusZ_tb
+            // 
+            this.MovPlusZ_tb.Location = new System.Drawing.Point(450, 25);
+            this.MovPlusZ_tb.Name = "MovPlusZ_tb";
+            this.MovPlusZ_tb.Size = new System.Drawing.Size(48, 20);
+            this.MovPlusZ_tb.TabIndex = 9;
+            this.MovPlusZ_tb.Text = "000";
+            this.MovPlusZ_tb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // MovMinusY_btn
             // 
             this.MovMinusY_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MovMinusY_btn.Location = new System.Drawing.Point(51, 84);
+            this.MovMinusY_btn.Location = new System.Drawing.Point(283, 84);
             this.MovMinusY_btn.Name = "MovMinusY_btn";
             this.MovMinusY_btn.Size = new System.Drawing.Size(30, 30);
-            this.MovMinusY_btn.TabIndex = 1;
-            this.MovMinusY_btn.Text = "←";
+            this.MovMinusY_btn.TabIndex = 8;
+            this.MovMinusY_btn.Text = "→";
             this.MovMinusY_btn.UseVisualStyleBackColor = true;
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(450, 79);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(48, 20);
-            this.textBox6.TabIndex = 19;
-            this.textBox6.Text = "000";
-            this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button1.Location = new System.Drawing.Point(152, 30);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(30, 30);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "↑";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(450, 25);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(48, 20);
-            this.textBox5.TabIndex = 18;
-            this.textBox5.Text = "000";
-            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(283, 84);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(30, 30);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "→";
-            this.button2.UseVisualStyleBackColor = true;
+            this.MovMinusY_btn.Click += new System.EventHandler(this.MovMinusY_btn_Click);
             // 
             // label11
             // 
@@ -309,36 +330,38 @@
             this.label11.TabIndex = 17;
             this.label11.Text = "Z down";
             // 
-            // button3
+            // MovMinusX_btn
             // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button3.Location = new System.Drawing.Point(152, 142);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(30, 30);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "↓";
-            this.button3.UseVisualStyleBackColor = true;
+            this.MovMinusX_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MovMinusX_btn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.MovMinusX_btn.Location = new System.Drawing.Point(152, 142);
+            this.MovMinusX_btn.Name = "MovMinusX_btn";
+            this.MovMinusX_btn.Size = new System.Drawing.Size(30, 30);
+            this.MovMinusX_btn.TabIndex = 4;
+            this.MovMinusX_btn.Text = "↓";
+            this.MovMinusX_btn.UseVisualStyleBackColor = true;
+            this.MovMinusX_btn.Click += new System.EventHandler(this.MovMinusX_btn_Click);
             // 
-            // button5
+            // MovMinusZ_btn
             // 
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button5.Location = new System.Drawing.Point(414, 73);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(30, 30);
-            this.button5.TabIndex = 16;
-            this.button5.Text = "↓";
-            this.button5.UseVisualStyleBackColor = true;
+            this.MovMinusZ_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MovMinusZ_btn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.MovMinusZ_btn.Location = new System.Drawing.Point(414, 73);
+            this.MovMinusZ_btn.Name = "MovMinusZ_btn";
+            this.MovMinusZ_btn.Size = new System.Drawing.Size(30, 30);
+            this.MovMinusZ_btn.TabIndex = 12;
+            this.MovMinusZ_btn.Text = "↓";
+            this.MovMinusZ_btn.UseVisualStyleBackColor = true;
+            this.MovMinusZ_btn.Click += new System.EventHandler(this.MovMinusZ_btn_Click);
             // 
-            // textBox1
+            // MovPlusX_tb
             // 
-            this.textBox1.Location = new System.Drawing.Point(144, 66);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(48, 20);
-            this.textBox1.TabIndex = 5;
-            this.textBox1.Text = "000";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.MovPlusX_tb.Location = new System.Drawing.Point(144, 66);
+            this.MovPlusX_tb.Name = "MovPlusX_tb";
+            this.MovPlusX_tb.Size = new System.Drawing.Size(48, 20);
+            this.MovPlusX_tb.TabIndex = 1;
+            this.MovPlusX_tb.Text = "000";
+            this.MovPlusX_tb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label10
             // 
@@ -358,16 +381,17 @@
             this.label12.TabIndex = 6;
             this.label12.Text = "mm";
             // 
-            // button4
+            // MovPlusZ_btn
             // 
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button4.Location = new System.Drawing.Point(414, 19);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(30, 30);
-            this.button4.TabIndex = 14;
-            this.button4.Text = "↑";
-            this.button4.UseVisualStyleBackColor = true;
+            this.MovPlusZ_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MovPlusZ_btn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.MovPlusZ_btn.Location = new System.Drawing.Point(414, 19);
+            this.MovPlusZ_btn.Name = "MovPlusZ_btn";
+            this.MovPlusZ_btn.Size = new System.Drawing.Size(30, 30);
+            this.MovPlusZ_btn.TabIndex = 10;
+            this.MovPlusZ_btn.Text = "↑";
+            this.MovPlusZ_btn.UseVisualStyleBackColor = true;
+            this.MovPlusZ_btn.Click += new System.EventHandler(this.MovPlusZ_btn_Click);
             // 
             // label13
             // 
@@ -383,27 +407,27 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(157, 175);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(20, 13);
+            this.label9.Size = new System.Drawing.Size(17, 13);
             this.label9.TabIndex = 13;
-            this.label9.Text = "+X";
+            this.label9.Text = "-X";
             // 
-            // textBox2
+            // MovMinusY_tb
             // 
-            this.textBox2.Location = new System.Drawing.Point(200, 90);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(48, 20);
-            this.textBox2.TabIndex = 7;
-            this.textBox2.Text = "000";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.MovMinusY_tb.Location = new System.Drawing.Point(200, 90);
+            this.MovMinusY_tb.Name = "MovMinusY_tb";
+            this.MovMinusY_tb.Size = new System.Drawing.Size(48, 20);
+            this.MovMinusY_tb.TabIndex = 7;
+            this.MovMinusY_tb.Text = "000";
+            this.MovMinusY_tb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(319, 93);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(20, 13);
+            this.label8.Size = new System.Drawing.Size(17, 13);
             this.label8.TabIndex = 13;
-            this.label8.Text = "+Y";
+            this.label8.Text = "-Y";
             // 
             // label3
             // 
@@ -419,27 +443,27 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(28, 93);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(17, 13);
+            this.label7.Size = new System.Drawing.Size(20, 13);
             this.label7.TabIndex = 13;
-            this.label7.Text = "-Y";
+            this.label7.Text = "+Y";
             // 
-            // textBox3
+            // MovPlusY_tb
             // 
-            this.textBox3.Location = new System.Drawing.Point(87, 90);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(48, 20);
-            this.textBox3.TabIndex = 9;
-            this.textBox3.Text = "000";
-            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.MovPlusY_tb.Location = new System.Drawing.Point(87, 90);
+            this.MovPlusY_tb.Name = "MovPlusY_tb";
+            this.MovPlusY_tb.Size = new System.Drawing.Size(48, 20);
+            this.MovPlusY_tb.TabIndex = 5;
+            this.MovPlusY_tb.Text = "000";
+            this.MovPlusY_tb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(158, 15);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(17, 13);
+            this.label6.Size = new System.Drawing.Size(20, 13);
             this.label6.TabIndex = 13;
-            this.label6.Text = "-X";
+            this.label6.Text = "+X";
             // 
             // label4
             // 
@@ -459,28 +483,29 @@
             this.label5.TabIndex = 12;
             this.label5.Text = "mm";
             // 
-            // textBox4
+            // MovMinusX_tb
             // 
-            this.textBox4.Location = new System.Drawing.Point(144, 116);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(48, 20);
-            this.textBox4.TabIndex = 11;
-            this.textBox4.Text = "000";
-            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.MovMinusX_tb.Location = new System.Drawing.Point(144, 116);
+            this.MovMinusX_tb.Name = "MovMinusX_tb";
+            this.MovMinusX_tb.Size = new System.Drawing.Size(48, 20);
+            this.MovMinusX_tb.TabIndex = 3;
+            this.MovMinusX_tb.Text = "000";
+            this.MovMinusX_tb.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // En_btn
             // 
             this.En_btn.Location = new System.Drawing.Point(8, 19);
             this.En_btn.Name = "En_btn";
             this.En_btn.Size = new System.Drawing.Size(75, 23);
-            this.En_btn.TabIndex = 0;
+            this.En_btn.TabIndex = 20;
             this.En_btn.Text = "Enable";
             this.En_btn.UseVisualStyleBackColor = true;
+            this.En_btn.Click += new System.EventHandler(this.En_btn_Click);
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button7);
-            this.groupBox3.Controls.Add(this.textBox10);
+            this.groupBox3.Controls.Add(this.SendCmd_btn);
+            this.groupBox3.Controls.Add(this.GantryCmd_tb);
             this.groupBox3.Location = new System.Drawing.Point(15, 485);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(568, 75);
@@ -488,41 +513,43 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Manual Command";
             // 
-            // textBox10
+            // SendCmd_btn
             // 
-            this.textBox10.Location = new System.Drawing.Point(22, 36);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(260, 20);
-            this.textBox10.TabIndex = 0;
+            this.SendCmd_btn.Location = new System.Drawing.Point(300, 34);
+            this.SendCmd_btn.Name = "SendCmd_btn";
+            this.SendCmd_btn.Size = new System.Drawing.Size(84, 23);
+            this.SendCmd_btn.TabIndex = 19;
+            this.SendCmd_btn.Text = "Send";
+            this.SendCmd_btn.UseVisualStyleBackColor = true;
+            this.SendCmd_btn.Click += new System.EventHandler(this.SendCmd_btn_Click);
             // 
-            // button7
+            // GantryCmd_tb
             // 
-            this.button7.Location = new System.Drawing.Point(300, 34);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(84, 23);
-            this.button7.TabIndex = 2;
-            this.button7.Text = "Send";
-            this.button7.UseVisualStyleBackColor = true;
+            this.GantryCmd_tb.Location = new System.Drawing.Point(22, 36);
+            this.GantryCmd_tb.Name = "GantryCmd_tb";
+            this.GantryCmd_tb.Size = new System.Drawing.Size(260, 20);
+            this.GantryCmd_tb.TabIndex = 18;
             // 
-            // GantrySettings_MenuStrip
+            // GantryCalibration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(594, 567);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.Calibration_gb);
+            this.Controls.Add(this.CalibrationMode_gb);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.ConsoleCmd_tb);
+            this.Controls.Add(this.ConsoleDialogue_TextBox);
             this.Controls.Add(this.ManualCmd_gb);
-            this.Name = "GantrySettings_MenuStrip";
+            this.Name = "GantryCalibration";
             this.Text = "Gantry Settings";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GantryCalibration_FormClosing);
             this.ManualCmd_gb.ResumeLayout(false);
             this.ManualCmd_gb.PerformLayout();
-            this.Calibration_gb.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.CalibrationMode_gb.ResumeLayout(false);
+            this.CalibrateHere_gb.ResumeLayout(false);
+            this.CalibrateHere_gb.PerformLayout();
+            this.DirectMove_gb.ResumeLayout(false);
+            this.DirectMove_gb.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
@@ -535,45 +562,46 @@
         private System.Windows.Forms.TextBox ManualCmdInput_tb;
         private System.Windows.Forms.GroupBox ManualCmd_gb;
         private System.Windows.Forms.Button ManualCmdSend_btn;
-        private System.Windows.Forms.TextBox ConsoleCmd_tb;
+        private System.Windows.Forms.TextBox ConsoleDialogue_TextBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox Calibration_gb;
-        private System.Windows.Forms.Button MovMinusY_btn;
+        private System.Windows.Forms.GroupBox CalibrationMode_gb;
+        private System.Windows.Forms.Button MovPlusY_btn;
         private System.Windows.Forms.Button En_btn;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox MovPlusX_tb;
+        private System.Windows.Forms.Button MovMinusX_btn;
+        private System.Windows.Forms.Button MovMinusY_btn;
+        private System.Windows.Forms.Button MovPlusX_btn;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox MovMinusX_tb;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox MovPlusY_tb;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox MovMinusY_tb;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox MovPlusZ_tb;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button MovMinusZ_btn;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button MovPlusZ_btn;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.GroupBox DirectMove_gb;
+        private System.Windows.Forms.TextBox MovMinusZ_tb;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.GroupBox CalibrateHere_gb;
+        private System.Windows.Forms.TextBox CaliZ_tb;
+        private System.Windows.Forms.TextBox CaliY_tb;
+        private System.Windows.Forms.Button CalibrateHere;
+        private System.Windows.Forms.TextBox CaliX_tb;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.Button SendCmd_btn;
+        private System.Windows.Forms.TextBox GantryCmd_tb;
+        private System.Windows.Forms.Button stop;
     }
 }

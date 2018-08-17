@@ -43,26 +43,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FreedomAuto.exe" size="559544">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FreedomAuto.exe" size="567224">
       <assemblyIdentity name="FreedomAuto" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>UGa7B6oIeS8C4412Gq47JBy0j3tQuiAbGLFw9kzavWw=</dsig:DigestValue>
+        <dsig:DigestValue>MJGiCvQacBMc2k+we2MKZ9ZvjWhxYAXRoFewNKBbJbY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GantryDllCs.dll" size="8704">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GantryDllCs.dll" size="10752">
       <assemblyIdentity name="GantryDllCs" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>zU7a5vogOrvQkcyvSGp0X2fpGMZe4dxFqyFJx74/PcA=</dsig:DigestValue>
+        <dsig:DigestValue>aZVSPDkmAst9AdOKsq+mpLJzO9pDCWNdqDY0GLguNrU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

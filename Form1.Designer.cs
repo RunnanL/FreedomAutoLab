@@ -285,6 +285,7 @@
             this.stop.TabIndex = 5;
             this.stop.Text = "STOP";
             this.stop.UseVisualStyleBackColor = true;
+            this.stop.Visible = false;
             this.stop.Click += new System.EventHandler(this.stop_Click);
             // 
             // Input_description
@@ -571,7 +572,6 @@
             this.gantryToolStripMenuItem.Name = "gantryToolStripMenuItem";
             this.gantryToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.gantryToolStripMenuItem.Text = "Gantry";
-            this.gantryToolStripMenuItem.Visible = false;
             // 
             // CalibrationManualToolStripMenuItem
             // 
@@ -591,7 +591,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 

@@ -18,7 +18,7 @@ namespace WindowsFormsApp1
 
         public string VerZes()
         {
-            return "1.0";
+            return "1.0.1";
         }
 
         public int ConnectPowerMeter(String ComNo)

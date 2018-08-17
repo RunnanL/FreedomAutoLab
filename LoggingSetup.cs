@@ -37,13 +37,14 @@ namespace WindowsFormsApp1
 
         public PowermeterZES ZES_ZIMMER;
         public Gantry GantryDll; // new 
+        public string UiVersion = "";
 
         public string LogVer()  //Logging service version number
         {
-            return "1.0.1";
+            return "1.0.2";
         }
 
-        public LoggingForm(PowermeterZES ZES_ZIMMER, Gantry GantryDll)
+        public LoggingForm(PowermeterZES ZES_ZIMMER, Gantry GantryDll, string UiVersionString)
         {
             InitializeComponent();
             LogVerDisp.Text = "Logging module: V"+LogVer(); // Version of logging module
@@ -73,7 +74,7 @@ namespace WindowsFormsApp1
             CommandList.Add("Regatron_A, ");
             CommandList.Add("ZES(), ");
 
-
+            UiVersion = UiVersionString;
         }
 
         #region ScriptLogging
@@ -239,7 +240,21 @@ namespace WindowsFormsApp1
                                 try
                                 {
                                     Double x = 0.0, y = 0.0, z = 0.0;
-                                    GantryDll.Pos(ref x, ref y, ref z);
+                                    int RetryNoReading = 0;
+                                    int Code = 0;
+                                    while (RetryNoReading < 5)
+                                    {
+                                        Code = GantryDll.Pos(ref x, ref y, ref z);
+                                        if (RetryNoReading >= 5)
+                                        {
+                                            DialogResult GantryReadingWarn = MessageBox.Show("Cannot read gantry position", "Error", MessageBoxButtons.AbortRetryIgnore);
+                                            if (GantryReadingWarn == DialogResult.Abort) { StopFlag = true; break; }
+                                            if (GantryReadingWarn == DialogResult.Retry) { RetryNoReading = 0; continue; }
+                                            if (GantryReadingWarn == DialogResult.Ignore) { break; }
+                                        }
+                                        if(1 == Code) { break; }
+                                        else { RetryNoReading++; }
+                                    }
                                     ReadBuffer = Convert.ToString(x) + "," + Convert.ToString(y) + "," + Convert.ToString(z) + ",";
                                     //gantry data check 
                                     int RetryGantryCount = 0;
@@ -557,6 +572,8 @@ namespace WindowsFormsApp1
             int ReadListCurser = 0;
             //int Out_test_curser = 0;
             string CurrentTitle = "";
+            OutList.Add("Scripting Version: "+ LogVer() + " " + UiVersion);
+            OutList.Add(DateTime.Now.ToString());
             foreach (string ScriptlineIterator in CSVcontents)
             {
                 try
@@ -735,7 +752,7 @@ namespace WindowsFormsApp1
         private void AddinputRead_Click(object sender, EventArgs e)
         {
             try { Script.AppendText(CommandList[Command.SelectedIndex]); }
-            catch { MessageBox.Show("Please select a 'Read' from box", "Opps", MessageBoxButtons.OK); }
+            catch { MessageBox.Show("Please select a 'Read' from above box", "Opps", MessageBoxButtons.OK); }
         }
 
         private void Stop_Click(object sender, EventArgs e)

@@ -25,32 +25,6 @@ namespace WindowsFormsApp1
 
         #region gantrydll
         Gantry GantryDll = new Gantry();
-        /*[DllImport("GantryFreedom.dll", EntryPoint = "DllVersion",CallingConvention = CallingConvention.Cdecl)]
-        public static extern int DllVersion(StringBuilder Ver, ref int bufferSize);
-        [DllImport("GantryFreedom.dll", EntryPoint = "GantryComConnect", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Int32 GantryComConnect(String COMNo); //, ref Int32 PortNoFound
-        [DllImport("GantryFreedom.dll", EntryPoint = "GantryComDisconnect", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Int32 GantryComDisconnect(String COMNo);
-        [DllImport("GantryFreedom.dll", EntryPoint = "ComWrite", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Int32 ComWrite(String cmd);
-        [DllImport("GantryFreedom.dll", EntryPoint = "ComRead", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Int32 ComRead(StringBuilder RdMsg, ref int buffersize);
-        [DllImport("GantryFreedom.dll", EntryPoint = "Com_W_R", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Int32 Com_W_R(String cmd, StringBuilder RdMsg, ref int buffersize);
-        [DllImport("GantryFreedom.dll", EntryPoint = "MotorCheck", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Int32 MotorCheck(Int32 MNo);
-        [DllImport("GantryFreedom.dll", EntryPoint = "MoveGantry", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Int32 MoveGantry (Double x,Double y, Double z, int buffsize);
-        [DllImport("GantryFreedom.dll", EntryPoint = "GantryStop", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Int32 GantryStop();
-        [DllImport("GantryFreedom.dll", EntryPoint = "PosRecali", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Int32 PosRecali();
-        [DllImport("GantryFreedom.dll", EntryPoint = "Pos", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Int32 Pos(ref Double x, ref Double y, ref Double z);
-        [DllImport("GantryFreedom.dll", EntryPoint = "CtrlReady", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Int32 CtrlReady(ref Int32 ReadyBits);
-        [DllImport("GantryFreedom.dll", EntryPoint = "AbsCheck", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Int32 AbsCheck(Int32 No);*/
         #endregion
 
         #region regatronmembers
@@ -145,14 +119,13 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
-            toolStripStatusLabel1.Text = "Version: V1.0.3  ";  //UI version
+            toolStripStatusLabel1.Text = "UI Version: V1.0.3  ";  //UI version
 
             #region Gantry Init
             goX.Text = "0";
             goY.Text = "0";
             goZ.Text = "0";
-            //StringBuilder Gantry_v = new StringBuilder(256);
-            //Int32 bufferSize = 32;
+
             string Gantry_v;
             Gantry_v =GantryDll.DllVersion();
             toolStripStatusLabel1.Text = toolStripStatusLabel1.Text + "Gantry: " + Gantry_v.ToString();
@@ -160,8 +133,7 @@ namespace WindowsFormsApp1
             Xstat.BackColor = RedNo;
             Ystat.BackColor = RedNo;
             Zstat.BackColor = RedNo;
-            #endregion
-            
+            #endregion       
             #region Regatron Init
             presentStateColor = textBox_voltageRef.BackColor;
             UInt32 version = 0;
@@ -170,7 +142,6 @@ namespace WindowsFormsApp1
             DllReadVersion(ref version, ref build, sb);
             toolStripStatusLabel1.Text = toolStripStatusLabel1.Text + "  RegatronTCIO: V" + (version >> 16).ToString() +  "." + (version & 0xFFFF).ToString();
             #endregion
-
             #region version info
             toolStripStatusLabel1.Text = toolStripStatusLabel1.Text + "  LCR: V" + HIOKI.VerLcr().ToString();
             toolStripStatusLabel1.Text = toolStripStatusLabel1.Text + "  Powermeter: V" + ZESzimmer.VerZes().ToString();
@@ -194,7 +165,6 @@ namespace WindowsFormsApp1
             LCRunitList.Add(" ");
             LCRunitList.Add(" ");
             #endregion
-
             #region ZES combobox matchread matchfetch list init
             ZEScmdMatchReadList.Add(":read:voltage:trms");
             ZEScmdMatchReadList.Add(":read:voltage:ac");
@@ -221,7 +191,6 @@ namespace WindowsFormsApp1
             ZEScmdMatchFetchList.Add("");
             ZEScmdMatchFetchList.Add("");
             #endregion
-
             #region ZES units match list
             ZESunitList.Add("V");
             ZESunitList.Add("V");
@@ -279,7 +248,7 @@ namespace WindowsFormsApp1
         #region Menu strip
         private void newScriptLoggingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LoggingForm LogParamForm = new LoggingForm(ZESzimmer,GantryDll);
+            LoggingForm LogParamForm = new LoggingForm(ZESzimmer,GantryDll, toolStripStatusLabel1.Text);
             LogParamForm.Show();
             auto_refresh.Checked = false;
             AutoReadLCR.Checked = false;
@@ -288,7 +257,11 @@ namespace WindowsFormsApp1
 
         private void CalibrationManualToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
+            GantryCalibration GantryCalibrationManual = new GantryCalibration(GantryDll);
+            GantryCalibrationManual.Show();
+            auto_refresh.Checked = false;
+            AutoReadLCR.Checked = false;
+            AutoRdZes.Checked = false;
         }
         #endregion
 
@@ -362,7 +335,6 @@ namespace WindowsFormsApp1
 
         private void TimerGantry_Tick(object sender, EventArgs e)
         {
-            // Int32 Result;
             Int32 ReadyBit = 0;
             Double Px = 0.0;
             Double Py = 0.0;
@@ -454,8 +426,20 @@ namespace WindowsFormsApp1
             Zto.Text = TarZ.ToString();
             Run_Pct_Flg = true; //progress bar enable flag
 
-            Int32 BufSize = 32;
-            GantryDll.MoveGantry(TarX, TarY, TarZ);
+            int RetryNoReading = 0;
+            int Code = 0;
+            while (RetryNoReading < 5)
+            {
+                Code = GantryDll.MoveGantry(TarX, TarY, TarZ);
+                if (RetryNoReading >= 5)
+                {
+                    DialogResult GantryReadingWarn = MessageBox.Show("Cannot move Gantry, controller error, retry?", "Error", MessageBoxButtons.YesNo);
+                    if (GantryReadingWarn == DialogResult.No) { break; }
+                    if (GantryReadingWarn == DialogResult.Yes) { RetryNoReading = 0; continue; }
+                }
+                if (1 == Code) { break; }
+                else { RetryNoReading++; }
+            }
        
             //if (Stat==2)
             // MessageBox.Show("Gantry connection lost. Please check connection", "Motor Not Available", MessageBoxButtons.OK);
@@ -547,7 +531,6 @@ namespace WindowsFormsApp1
         private void CMD_go_Click(object sender, EventArgs e)
         {
             //StringBuilder RX = new StringBuilder(128);
-            int BufSiz = 64;
             GantryDll.Com_W_R(CMD_txt.Text);
             TestLabel.Text = GantryDll.ReadBuffer.ToString();
             //TestLabel.Text = RX.ToString();

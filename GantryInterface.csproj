@@ -95,11 +95,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="GantrySettings_MenuStrip.cs">
+    <Compile Include="GantryCalibration.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GantrySettings_MenuStrip.Designer.cs">
-      <DependentUpon>GantrySettings_MenuStrip.cs</DependentUpon>
+      <DependentUpon>GantryCalibration.cs</DependentUpon>
     </Compile>
     <Compile Include="LCRmeter.cs" />
     <Compile Include="LoggingSetup.cs">
@@ -115,7 +115,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GantrySettings_MenuStrip.resx">
-      <DependentUpon>GantrySettings_MenuStrip.cs</DependentUpon>
+      <DependentUpon>GantryCalibration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoggingSetup.resx">
       <DependentUpon>LoggingSetup.cs</DependentUpon>

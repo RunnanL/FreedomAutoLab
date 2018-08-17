@@ -1,5 +1,4 @@
 C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
-C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\FreedomAuto.GantrySettings_MenuStrip.resources
 C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.LoggingForm.resources
 C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\GantryInterface.csproj.GenerateResource.Cache
 C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\FreedomAuto.Properties.Resources.resources
@@ -15,3 +14,5 @@ C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\Wi
 C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\GantryDllCs.dll
 C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\bin\Debug\GantryDllCs.pdb
 C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\FreedomAuto.application
+C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\GantryInterface.csprojResolveAssemblyReference.cache
+C:\Users\runnanli\Desktop\Kane Runnan\Runnan_Program\CS test\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.GantryCalibration.resources
