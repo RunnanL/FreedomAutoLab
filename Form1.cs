@@ -13,7 +13,7 @@ using GantryDllCs;
 
 namespace WindowsFormsApp1
 {
-
+    
     public partial class Form1 : Form
     {
         #region gantrymembers
@@ -248,7 +248,7 @@ namespace WindowsFormsApp1
         #region Menu strip
         private void newScriptLoggingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LoggingForm LogParamForm = new LoggingForm(ZESzimmer,GantryDll, toolStripStatusLabel1.Text);
+            LoggingForm LogParamForm = new LoggingForm(ZESzimmer, GantryDll, toolStripStatusLabel1.Text);
             LogParamForm.Show();
             auto_refresh.Checked = false;
             AutoReadLCR.Checked = false;
@@ -257,11 +257,18 @@ namespace WindowsFormsApp1
 
         private void CalibrationManualToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            GantryCalibration GantryCalibrationManual = new GantryCalibration(GantryDll);
-            GantryCalibrationManual.Show();
-            auto_refresh.Checked = false;
-            AutoReadLCR.Checked = false;
-            AutoRdZes.Checked = false;
+            if (0 == ComGantryStatus_n)
+            {
+                MessageBox.Show("No Gantry connection detected, please connect Gantry before calibration!", "No connection");
+            }
+            else if (1 == ComGantryStatus_n || 2 == ComGantryStatus_n)
+            {
+                GantryCalibration GantryCalibrationManual = new GantryCalibration(GantryDll);
+                GantryCalibrationManual.Show();
+                auto_refresh.Checked = false;
+                AutoReadLCR.Checked = false;
+                AutoRdZes.Checked = false;
+            }
         }
         #endregion
 
@@ -301,36 +308,38 @@ namespace WindowsFormsApp1
             else { return 0; }
         }
 
-        public int ChkAbs()
+        public void ChkAbs()
         { //  motor chk need separate with #1y1 load memory. TBC
-            Int32 result;
-            result = GantryDll.AbsCheck(1);
-            switch (result)
+            Int32 ResultX, ResultY, ResultZ;
+            ResultX = GantryDll.AbsCheck(1);
+            switch (ResultX)
             {
                 case 1:
                     Xabs.BackColor = GreenYes; break;
                 case 0:
                     Xabs.BackColor = RedNo; break;
             }
-            result = GantryDll.AbsCheck(2);
-            switch (result)
+            ResultY = GantryDll.AbsCheck(2);
+            switch (ResultY)
             {
                 case 1:
                     Yabs.BackColor = GreenYes; break;
                 case 0:
                     Yabs.BackColor = RedNo; break;
             }
-            result = GantryDll.AbsCheck(3);
-            switch (result)
+            ResultZ = GantryDll.AbsCheck(3);
+            switch (ResultZ)
             {
                 case 1:
                     Zabs.BackColor = GreenYes; break;
                 case 0:
                     Zabs.BackColor = RedNo; break;
             }
-
-            return 1;
-
+            if(0 == ResultX || 0 == ResultY || 0 == ResultZ)
+            { MessageBox.Show("ERROR, one or more motors NOT in Absolute positioning mode!\n" +
+                "Error motor(s) movement will be based on Direct movement NOT on X,Y,Z coordinate.\n\n"+
+                "Please CALIBRATE Gantry before use or retry connection.","WARNING, Not in coordinate movement");
+            }
         }
 
         private void TimerGantry_Tick(object sender, EventArgs e)
@@ -339,9 +348,21 @@ namespace WindowsFormsApp1
             Double Px = 0.0;
             Double Py = 0.0;
             Double Pz = 0.0;
+            Int32 LoopCounter = 0;
+            Int32 Code = 0;
             try
             {
-                GantryDll.Pos(ref Px, ref Py, ref Pz);
+                while (true)
+                {
+                    if (LoopCounter > 5)
+                    {
+                        auto_refresh.Checked = false; Xstat.BackColor = RedNo; Ystat.BackColor = RedNo; Zstat.BackColor = RedNo;
+                        Xrdy.BackColor = RedNo; Yrdy.BackColor = RedNo; Zrdy.BackColor = RedNo; return;
+                    }
+                    Code = GantryDll.Pos(ref Px, ref Py, ref Pz);
+                    if(1 == Code) { break; }
+                    else { Thread.Sleep(50); LoopCounter++; }
+                }
                 GantryDll.CtrlReady(ref ReadyBit);
                     if (1 == (ReadyBit & 100) / 100)
                     { Xrdy.BackColor = GreenYes; }
@@ -359,7 +380,7 @@ namespace WindowsFormsApp1
                 }
                 catch (Exception)
                 {
-                    Xstat.BackColor = RedNo; Ystat.BackColor = RedNo; Zstat.BackColor = RedNo; auto_refresh.Checked = false;
+                    auto_refresh.Checked = false; Xstat.BackColor = RedNo; Ystat.BackColor = RedNo; Zstat.BackColor = RedNo; 
                     Xrdy.BackColor = RedNo; Yrdy.BackColor = RedNo; Zrdy.BackColor = RedNo;return;
                 } //xyz disconnection detect
 
@@ -396,7 +417,7 @@ namespace WindowsFormsApp1
 
         private void auto_refresh_CheckedChanged(object sender, EventArgs e)
         {
-            if (auto_refresh.Checked == true)
+            if (true == auto_refresh.Checked)
             {
                 TimerGantry.Enabled = true;
             }
@@ -408,42 +429,41 @@ namespace WindowsFormsApp1
 
         private void Run_Click(object sender, EventArgs e)  //run gantry
         {
-            //PosRecali(); // reconfirm position before moving
-            Double TarX = Convert.ToDouble(goX.Text);
-            Double TarY = Convert.ToDouble(goY.Text);
-            Double TarZ = Convert.ToDouble(goZ.Text);
-            progressBar1.Value = 0;
-            perct_tag.Text = "0";
-            progressBar2.Value = 0;
-            perct_tag2.Text = "0";
-            progressBar3.Value = 0;
-            perct_tag3.Text = "0";
-            Xfrom.Text = posX.Text;
-            Yfrom.Text = posY.Text;
-            Zfrom.Text = posZ.Text;
-            Xto.Text = TarX.ToString();
-            Yto.Text = TarY.ToString();
-            Zto.Text = TarZ.ToString();
-            Run_Pct_Flg = true; //progress bar enable flag
-
-            int RetryNoReading = 0;
-            int Code = 0;
-            while (RetryNoReading < 5)
+            try
             {
-                Code = GantryDll.MoveGantry(TarX, TarY, TarZ);
-                if (RetryNoReading >= 5)
+                Double TarX = Convert.ToDouble(goX.Text);
+                Double TarY = Convert.ToDouble(goY.Text);
+                Double TarZ = Convert.ToDouble(goZ.Text);
+                progressBar1.Value = 0;
+                perct_tag.Text = "0";
+                progressBar2.Value = 0;
+                perct_tag2.Text = "0";
+                progressBar3.Value = 0;
+                perct_tag3.Text = "0";
+                Xfrom.Text = posX.Text;
+                Yfrom.Text = posY.Text;
+                Zfrom.Text = posZ.Text;
+                Xto.Text = TarX.ToString();
+                Yto.Text = TarY.ToString();
+                Zto.Text = TarZ.ToString();
+                Run_Pct_Flg = true; //progress bar enable flag
+
+                int RetryNoReading = 0;
+                int Code = 0;
+                while (true)
                 {
-                    DialogResult GantryReadingWarn = MessageBox.Show("Cannot move Gantry, controller error, retry?", "Error", MessageBoxButtons.YesNo);
-                    if (GantryReadingWarn == DialogResult.No) { break; }
-                    if (GantryReadingWarn == DialogResult.Yes) { RetryNoReading = 0; continue; }
+                    Code = GantryDll.MoveGantry(TarX, TarY, TarZ);
+                    if (RetryNoReading >= 5)
+                    {
+                        DialogResult GantryReadingWarn = MessageBox.Show("Cannot move Gantry, no response from Gantry controller, retry?", "Gantry response timeout", MessageBoxButtons.YesNo);
+                        if (GantryReadingWarn == DialogResult.No) { break; }
+                        if (GantryReadingWarn == DialogResult.Yes) { RetryNoReading = 0; continue; }
+                    }
+                    if (1 == Code) { break; }
+                    else {Thread.Sleep(100); RetryNoReading++; }
                 }
-                if (1 == Code) { break; }
-                else { RetryNoReading++; }
             }
-       
-            //if (Stat==2)
-            // MessageBox.Show("Gantry connection lost. Please check connection", "Motor Not Available", MessageBoxButtons.OK);
-            //MessageBox.Show("Finished","Message",MessageBoxButtons.OK);
+            catch (Exception ErrMove){ MessageBox.Show("Cannot Move Gantry\n\n"+ErrMove,"Cannot move gantry now"); }
         }
 
         private void ConnectGantry_Click(object sender, EventArgs e) 
@@ -491,6 +511,7 @@ namespace WindowsFormsApp1
             int Msg = GantryDll.GantryComDisconnect();
             if (Msg == 1)
             {
+                ComGantryStatus_n = 0;
                 GantryConnStat.BackColor = RedNo;
                 MessageBox.Show("Gantry COM port disconnected.", "Com Port Message", MessageBoxButtons.OK);
                 auto_refresh.Checked = false; //cancel auto refresh free CPU usage

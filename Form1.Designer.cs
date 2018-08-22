@@ -285,7 +285,6 @@
             this.stop.TabIndex = 5;
             this.stop.Text = "STOP";
             this.stop.UseVisualStyleBackColor = true;
-            this.stop.Visible = false;
             this.stop.Click += new System.EventHandler(this.stop_Click);
             // 
             // Input_description

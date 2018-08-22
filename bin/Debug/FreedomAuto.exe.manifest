@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FreedomAuto.exe" size="567224">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FreedomAuto.exe" size="568248">
       <assemblyIdentity name="FreedomAuto" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>MJGiCvQacBMc2k+we2MKZ9ZvjWhxYAXRoFewNKBbJbY=</dsig:DigestValue>
+        <dsig:DigestValue>9Xobw+FYSQ/OgpXXUIyUipLnc8EU5+n195ccgKmEVSg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -75,13 +75,13 @@
       <dsig:DigestValue>azurR3xLdyAcPatFCW7M9dnmD1PZrgaqkRuGafIhHpc=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="FreedomAuto.exe.config" size="186">
+  <file name="FreedomAuto.exe.config" size="231">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>PHWXGWnHgIeVMvfarRU9fyyIhl2OQtF8t+21+KTggvo=</dsig:DigestValue>
+      <dsig:DigestValue>K3BiQw03Yp5Ia7JHF7JdcMzlQAfSRc3p5hYj63Q8i/4=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
