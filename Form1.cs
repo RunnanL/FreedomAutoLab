@@ -984,14 +984,14 @@ namespace WindowsFormsApp1
         {
             try
             {
-                try { HIOKI.Measure();   
+                try { HIOKI.Measure();}
+                catch (Exception) { AutoReadLCR.Checked = false; TimerLCR.Enabled = false; return; }
                 string[] tokens = HIOKI.ResponseData.Split(',');
                 LCR1Value.Text = tokens[0];//Decimal.Parse( tokens[0], System.Globalization.NumberStyles.AllowExponent | System.Globalization.NumberStyles.AllowDecimalPoint).ToString();
                 LCR2Value.Text = tokens[1];
                 LCR3Value.Text = tokens[2];
                 LCR4Value.Text = tokens[3];
-                }
-                catch (Exception) { AutoReadLCR.Checked = false; TimerLCR.Enabled = false; ; return; }
+                
             }
             catch (Exception ex) { AutoReadLCR.Checked = false; TimerLCR.Enabled = false; return; }
         }

@@ -47,40 +47,43 @@ namespace WindowsFormsApp1
 
         public void LCRwrite_read(String strMsg)
         {
-            try
+            if (true == LCRsocket.Connected)
             {
-                ResponseData = String.Empty;
-                strMsg = strMsg + "\r\n";              
-                Byte[] data = System.Text.Encoding.ASCII.GetBytes(strMsg);
-                ns  = LCRsocket.GetStream();
-                ns.Write(data, 0, data.Length);
-                
-                int milliseconds = 50;
-                Thread.Sleep(milliseconds);
-                Byte[] DAT = new Byte[1024];
-
-                if (ns.DataAvailable)
+                try
                 {
-                    Int32 bytes = ns.Read(DAT, 0, DAT.Length);
-                    ResponseData = System.Text.Encoding.ASCII.GetString(DAT, 0, bytes);
-                    ResponseData.Trim();
-                }
-                else
-                 {
-                    milliseconds = 500;
+                    ResponseData = String.Empty;
+                    strMsg = strMsg + "\r\n";
+                    Byte[] data = System.Text.Encoding.ASCII.GetBytes(strMsg);
+                    ns = LCRsocket.GetStream();
+                    ns.ReadTimeout = 900;
+                    ns.Write(data, 0, data.Length);
+
+                    int milliseconds = 50;
                     Thread.Sleep(milliseconds);
-                   // await Task.Delay(milliseconds);
+                    Byte[] DAT = new Byte[1024];
+
+                    if (ns.DataAvailable)
+                    {
+                        Int32 bytes = ns.Read(DAT, 0, DAT.Length);
+                        ResponseData = System.Text.Encoding.ASCII.GetString(DAT, 0, bytes);
+                        ResponseData.Trim();
+                    }
+                    else
+                    {
+                        milliseconds = 500;
+                        Thread.Sleep(milliseconds);
+                        // await Task.Delay(milliseconds);
                         if (ns.DataAvailable)
                         {
                             Int32 bytes = ns.Read(DAT, 0, DAT.Length);
                             ResponseData = System.Text.Encoding.ASCII.GetString(DAT, 0, bytes);
                             ResponseData.Trim();
                         }
-                  }
-                
+                    }
+
+                }
+                catch (Exception ERR) { MessageBox.Show(ERR.Message, "Error"); }
             }
-            catch (Exception ERR) { MessageBox.Show(ERR.Message, "Error"); }
-            //return 0;
         }
 
         public void LCR_Param_Change(int BoxNo, string ChangeTo)
@@ -98,23 +101,28 @@ namespace WindowsFormsApp1
             LCRwrite_read(cmd);
         }
 
-        public void Measure()
+        public int Measure()
         {
-            LCRwrite_read(":MEASure?");
-
-            int Counter_LCR_retry = 0;
-            string[] tokens = ResponseData.Split(',');
-            while (4!=tokens.Length)
+            try
             {
-                if (Counter_LCR_retry > 49) //retry if read data not showing LCR1/LCR2/LCR3/LCR4 four data. Limit try 50 times
-                { break; }
-                else
+                LCRwrite_read(":MEASure?");
+
+                int Counter_LCR_retry = 0;
+                string[] tokens = ResponseData.Split(',');
+                while (4 != tokens.Length)
                 {
-                    LCRwrite_read(":MEASure?");
-                    tokens = ResponseData.Split(',');
-                    Counter_LCR_retry++;
+                    if (Counter_LCR_retry > 49) //retry if read data not showing LCR1/LCR2/LCR3/LCR4 four data. Limit try 50 times
+                    { break; }
+                    else
+                    {
+                        LCRwrite_read(":MEASure?");
+                        tokens = ResponseData.Split(',');
+                        Counter_LCR_retry++;
+                    }
                 }
+                return 1;
             }
+            catch { return 0; }
         }
     }
 }

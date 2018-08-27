@@ -206,11 +206,11 @@ namespace WindowsFormsApp1
             try
             {
                 int Code = 0;
-                Code = GantryDll.Calibrate(Convert.ToDouble(CaliX_tb.Text), Convert.ToDouble(CaliY_tb.Text), Convert.ToDouble(CaliZ_tb.Text));
+                Code = GantryDll.Calibrate(Convert.ToDouble(CaliX_tb.Text.Trim()), Convert.ToDouble(CaliY_tb.Text.Trim()), Convert.ToDouble(CaliZ_tb.Text.Trim()));
                 if (0 == Code) { MessageBox.Show("One or more motor(s) NOT been calibrated, please try again", "Incomplete motor calibration"); return; }
+                CalibrationOff();
                 MessageBox.Show("Calibration Succeeded!", "Succeed");
                 ConsoleDialogue_TextBox.AppendText("Calibration Succeeded!\n");
-                CalibrationOff();
             }
             catch { MessageBox.Show("CANNOT calibrate, please try again", "ERROR"); }
         }

@@ -1094,7 +1094,6 @@
             this.labelMabs.Size = new System.Drawing.Size(25, 13);
             this.labelMabs.TabIndex = 43;
             this.labelMabs.Text = "Abs";
-            this.labelMabs.Visible = false;
             // 
             // Zabs
             // 
@@ -1106,7 +1105,6 @@
             this.Zabs.TabIndex = 42;
             this.Zabs.Text = "  ";
             this.Zabs.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.Zabs.Visible = false;
             // 
             // Yabs
             // 
@@ -1118,7 +1116,6 @@
             this.Yabs.TabIndex = 41;
             this.Yabs.Text = "  ";
             this.Yabs.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.Yabs.Visible = false;
             // 
             // Xabs
             // 
@@ -1130,7 +1127,6 @@
             this.Xabs.TabIndex = 40;
             this.Xabs.Text = "  ";
             this.Xabs.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.Xabs.Visible = false;
             // 
             // labelMrdy
             // 
@@ -1790,7 +1786,7 @@
             // 
             // TimerLCR
             // 
-            this.TimerLCR.Interval = 1000;
+            this.TimerLCR.Interval = 1500;
             this.TimerLCR.Tick += new System.EventHandler(this.TimerLCR_Tick);
             // 
             // groupBox4
